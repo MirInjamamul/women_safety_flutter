@@ -119,11 +119,10 @@ class _OnboardingState extends State<Onboarding> {
         children: [
           InkWell(
             onTap: (){
-            //  TODO push to sign page
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => Signin()),
-            //   ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Signin()),
+              );
             },
             child: Text(
               'Skip',
@@ -160,11 +159,10 @@ class _OnboardingState extends State<Onboarding> {
         children: [
           InkWell(
             onTap: (){
-              //TODO need to push sign in page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Signin()),
-              // ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Signin()),
+              );
             },
             child: Container(
               padding: const EdgeInsets.all(fixPadding),

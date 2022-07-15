@@ -10,6 +10,18 @@ SizedBox widthSpace = const SizedBox(width: 5);
 
 const double fixPadding = 10;
 
+TextStyle primaryColor14SemiBoldTextStyle = const TextStyle(
+  color: primaryColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle white12BoldTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 12,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle white13RegularTextStyle = const TextStyle(
   color: whiteColor,
   fontSize: 13,
@@ -22,8 +34,44 @@ TextStyle white14SemiBoldTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle white16BoldTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle white18SemiBoldTextStyle = const TextStyle(
   color: whiteColor,
   fontSize: 18,
   fontWeight: FontWeight.w600,
+);
+
+TextStyle white20BoldTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle black15SemiBoldTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 15,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle grey12RegularTextStyle = const TextStyle(
+  color: greyColor,
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle grey14SemiBoldTextStyle = const TextStyle(
+  color: greyColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle grey15RegularTextStyle = const TextStyle(
+  color: greyColor,
+  fontSize: 15,
+  fontWeight: FontWeight.w400,
 );
