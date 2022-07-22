@@ -16,6 +16,54 @@ TextStyle primaryColor14SemiBoldTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle black14SemiBoldTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle white14SemiBoldTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle grey14SemiBoldTextStyle = const TextStyle(
+  color: greyColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle black14BoldTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle white14BoldTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 14,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle primaryColor13RegularTextStyle = const TextStyle(
+  color: primaryColor,
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle black13RegularTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle primaryColor12BlackTextStyle = const TextStyle(
+  color: primaryColor,
+  fontSize: 12,
+  fontWeight: FontWeight.w900,
+);
+
 TextStyle white12BoldTextStyle = const TextStyle(
   color: whiteColor,
   fontSize: 12,
@@ -28,11 +76,7 @@ TextStyle white13RegularTextStyle = const TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-TextStyle white14SemiBoldTextStyle = const TextStyle(
-  color: whiteColor,
-  fontSize: 14,
-  fontWeight: FontWeight.w600,
-);
+
 
 TextStyle white16BoldTextStyle = const TextStyle(
   color: whiteColor,
@@ -58,17 +102,37 @@ TextStyle black15SemiBoldTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle black20BoldTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle black16BoldTextStyle = const TextStyle(
+  color: blackColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle grey12RegularTextStyle = const TextStyle(
   color: greyColor,
   fontSize: 12,
   fontWeight: FontWeight.w400,
 );
 
-TextStyle grey14SemiBoldTextStyle = const TextStyle(
+TextStyle grey14RegularTextStyle = const TextStyle(
   color: greyColor,
   fontSize: 14,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w400,
 );
+
+TextStyle grey13RegularTextStyle = const TextStyle(
+  color: greyColor,
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
+);
+
+
 
 TextStyle grey15RegularTextStyle = const TextStyle(
   color: greyColor,

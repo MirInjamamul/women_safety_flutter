@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -285,11 +286,6 @@ class _SigninState extends State<Signin> {
       onTap: () {
         //TODO login with email and password
         checkUserLogin();
-
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => Signup()),
-        // );
       },
       child: Container(
         padding: const EdgeInsets.all(fixPadding * 1.5),
@@ -319,6 +315,14 @@ class _SigninState extends State<Signin> {
           textColor: Colors.white,
           fontSize: 16.0
       );
+
+      currentIndex = 0;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => BottomBar()),
+      );
+
     }else{
       Fluttertoast.showToast(
           msg: "Wrong Username and Password",

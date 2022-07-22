@@ -350,10 +350,17 @@ class _SignupState extends State<Signup> {
 
   signupButton(context) {
     return InkWell(
-      //TODO push to profile picture page
+      //TODO push to BottomBar
       onTap: (){
 
         saveData();
+        currentIndex = 0;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const BottomBar()),
+        );
+
       },
 
       // onTap: () => Navigator.push(
