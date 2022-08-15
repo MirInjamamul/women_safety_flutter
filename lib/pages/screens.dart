@@ -7,3 +7,6 @@ export 'package:women_safety_flutter/pages/auth/signup.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:women_safety_flutter/bottom_bar.dart';
 export 'package:women_safety_flutter/pages/home/home.dart';
+export 'package:women_safety_flutter/platforms/channels.dart';
+export 'package:women_safety_flutter/pages/data/notify_contact.dart';
+export '../../webrtc/signalling.dart';

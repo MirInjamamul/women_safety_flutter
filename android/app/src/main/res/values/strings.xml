@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Contact Picker Design    -->
+    <string name="var_numbers_trigger" translatable="false">triggerNumbers</string>
+    <string name="var_numbers_notify" translatable="false">notifyNumbers</string>
+
+</resources>
