@@ -64,7 +64,7 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
     Random random ;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     String AudioSavePathInDevice = null;
-
+    File audioFile = null;
     Handler handler = new Handler();
     Handler recording_handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -83,10 +83,6 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
         telephonyManager = (TelephonyManager)this.context.getSystemService(Context.TELEPHONY_SERVICE);
         random = new Random();
 
-//        Get the Firebase Storage References
-//        firebaseStorage = FirebaseStorage.getInstance();
-//        storageReference = firebaseStorage.getReference();
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
 
         try {
@@ -96,18 +92,6 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
 
             Log.d(TAG, "onReceive: " + incomingNumber);
 
-//            if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
-//                Toast.makeText(context, "Incoming Call State", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(context, "Ringing State Number is -" + incomingNumber, Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//            if ((state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK))) {
-//                Toast.makeText(context, "Call Received State", Toast.LENGTH_SHORT).show();
-//            }
-//            if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
-//                Toast.makeText(context, "Call Idle State", Toast.LENGTH_SHORT).show();
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -140,77 +124,66 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
 
 //            recordAudio();
 
-
             handler.removeCallbacks(runnable);
         }
         handler.postDelayed(runnable, (long) (2000 * 1.5));
 
     }
 
-//    public void recordAudio() {
-//
-//        new Timer().schedule(new TimerTask()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                recording_handler.post(new Runnable()
-//                {
-//
-//                    @Override
-//                    public void run()
-//                    {
-//                        mediaRecorder.stop();
-//                        Log.d(TAG, "Recording Complete");
-//
-//                        Uri file = Uri.fromFile(new File(AudioSavePathInDevice));
-//                        StorageReference audioReferences = storageReference.child("audio/"+file.getLastPathSegment());
-//                        UploadTask uploadTask = audioReferences.putFile(file);
-//
-//                        //Register Observer
-//                        uploadTask.addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.d(TAG, "onFailure: ");
-//                            }
-//                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                Log.d(TAG, "onSuccess: ");
-//                            }
-//                        });
-//
-//                    }
-//                });
-//
-//            }
-//        }, 10000);
-//
-//        AudioSavePathInDevice =
-//                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-//                        CreateRandomAudioFileName(5) + "AudioRecording.3gp";
-//
-//        MediaRecorderReady();
-//
-//        try {
-//            mediaRecorder.prepare();
-//            mediaRecorder.start();
-//        } catch (IllegalStateException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
+    public void recordAudio() {
 
-//    public void MediaRecorderReady(){
-//        mediaRecorder=new MediaRecorder();
-//        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-//        mediaRecorder.setOutputFile(AudioSavePathInDevice);
-//    }
+        new Timer().schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                recording_handler.post(new Runnable()
+                {
+
+                    @Override
+                    public void run()
+                    {
+                        mediaRecorder.stop();
+                        Log.d(TAG, "Media Record Complete");
+                    }
+                });
+
+            }
+        }, 10000);
+
+        File dir = Environment.getExternalStorageDirectory();
+
+        try{
+            audioFile = File.createTempFile("sound",".3gp", dir);
+        }catch (IOException exception){
+            Log.e(TAG, "External storage access error");
+        }
+
+        MediaRecorderReady();
+
+        try {
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+
+            Log.d(TAG,"Media Record Started");
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void MediaRecorderReady(){
+        mediaRecorder=new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mediaRecorder.setOutputFile(audioFile.getAbsoluteFile());
+        }
+    }
 
     public String CreateRandomAudioFileName(int string){
         StringBuilder stringBuilder = new StringBuilder( string );
@@ -263,6 +236,10 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
         String keyword = "Help";
         SmsManager manager = SmsManager.getDefault();
 
+        Log.d(TAG, "Contact List ");
+        Log.d(TAG, ">>> "+contact_list_number.toString());
+
+
         for (int counter = 0; counter < contact_list_number.size(); counter++) {
             String phone_number = (String) contact_list_number.get(counter);
 
@@ -283,24 +260,6 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
 
             Log.d(TAG, "sendOutPanic: Message Sent Successfully");
         }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            contact_list_number.forEach((number) -> {
-//                StringBuilder sb = new StringBuilder(keyword);
-//                // Add Battery Level in SMS
-//                sb.append("\n" + "Battery Level : " +battery_level);
-////                Add IEMI Number in SMS
-//                sb.append("\n" + "IMEI : " +imei_number);
-//
-//                if (loc != null)
-//                    sb.append("\n" + "Latitude"+ loc.getLatitude() + "\n" + "Longitude : "+ loc.getLongitude());
-//
-//                manager.sendTextMessage(number.toString(), null, sb.toString(), null, null);
-//                Log.d(TAG, "sendOutPanic: Message Sent Successfully");
-//
-//                System.out.print(number + " ");
-//            });
-//        }
     }
 
     private void getCurrentLocationAndPanic() {

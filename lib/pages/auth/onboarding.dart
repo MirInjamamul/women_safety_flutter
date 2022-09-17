@@ -158,11 +158,25 @@ class _OnboardingState extends State<Onboarding> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           InkWell(
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Signin()),
-              );
+            onTap: () async {
+
+              bool loggedIn = await loggedAuthFetch();
+
+              if(loggedIn){
+                currentIndex = 0;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BottomBar()),
+                );
+              }else{
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Signin()),
+                );
+              }
+
+
             },
             child: Container(
               padding: const EdgeInsets.all(fixPadding),
@@ -229,5 +243,11 @@ class _OnboardingState extends State<Onboarding> {
         ),
       ],
     );
+  }
+
+  Future<bool> loggedAuthFetch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.getBool('login') ?? false;
   }
 }

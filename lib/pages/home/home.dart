@@ -340,6 +340,7 @@ class _HomeState extends State<Home> {
 
     }else{
       print("Observation Switch Off");
+      _disconnect();
     }
   }
 
@@ -428,6 +429,12 @@ class _HomeState extends State<Home> {
 
     _signaling?.onRemoveRemoteStream = ((_, stream) {
     });
+  }
+
+  _disconnect(){
+    // _signaling?.close();
+    // _localRenderer.dispose();
+
   }
 
   void insert_numbers() {

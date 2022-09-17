@@ -96,6 +96,12 @@ TextStyle white20BoldTextStyle = const TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+TextStyle white12RegularTextStyle = const TextStyle(
+  color: whiteColor,
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
 TextStyle black15SemiBoldTextStyle = const TextStyle(
   color: blackColor,
   fontSize: 15,

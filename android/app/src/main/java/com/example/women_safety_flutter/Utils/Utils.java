@@ -71,6 +71,7 @@ public class Utils {
         permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
         permissions.add(Manifest.permission.CALL_PHONE);
         permissions.add(Manifest.permission.INTERNET);
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         permissions.add(Manifest.permission.RECEIVE_SMS);
         permissions.add(Manifest.permission.RECORD_AUDIO);
         permissions.add(Manifest.permission.SEND_SMS);

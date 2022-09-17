@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
 class BottomBar extends StatefulWidget {
@@ -38,7 +39,9 @@ class _BottomBarState extends State<BottomBar> {
             ? const Home()
             : (currentIndex == 2)
             ? const Home()
-            : const Home(),
+            : (currentIndex == 3)
+            ? const Home()
+            : const Chat(),
       ),
       bottomNavigationBar: Container(
         height: 55.0,
@@ -53,6 +56,7 @@ class _BottomBarState extends State<BottomBar> {
               getBottomBarItemTile(1, 'assets/icons/home.png', 'Home'),
               getBottomBarItemTile(2, 'assets/icons/search.png', 'Notification'),
               getBottomBarItemTile(3, 'assets/icons/profile.png', 'Profile'),
+              getBottomBarItemTile(4, 'assets/icons/chat.png', 'Chat'),
             ],
           ),
         ),
