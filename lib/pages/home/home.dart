@@ -45,8 +45,8 @@ class _HomeState extends State<Home> {
     fetchData();
 
 
-    initRenderers();
-    _getUserMedia();
+    // initRenderers();
+    // _getUserMedia();
 
     super.initState();
   }
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
 
   _getUserMedia() async {
     final Map<String, dynamic> cons = {
-      'audio': true,
+      'audio': false,
       'video': {
         'mandatory': {
           'maxWidth': '640',
@@ -339,7 +339,12 @@ class _HomeState extends State<Home> {
     if(observationSwitch){
       print("Observation Switch Triggered");
 
-      _connect();
+      initRenderers();
+      _getUserMedia().then((value){
+        _connect();
+      });
+
+
 
     }else{
       print("Observation Switch Off");
