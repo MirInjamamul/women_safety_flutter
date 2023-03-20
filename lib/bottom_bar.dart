@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
+import 'package:women_safety_flutter/pages/online_service/online_service.dart';
+import 'package:women_safety_flutter/pages/profile/profile_screen.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
 class BottomBar extends StatefulWidget {
@@ -38,9 +40,9 @@ class _BottomBarState extends State<BottomBar> {
             : (currentIndex == 1)
             ? const Home()
             : (currentIndex == 2)
-            ? const Home()
+            ? const OnlineServiceScreen()
             : (currentIndex == 3)
-            ? const Home()
+            ? const Profile()
             : const Chat(),
       ),
       bottomNavigationBar: Container(
@@ -54,7 +56,7 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               getBottomBarItemTile(0, 'assets/icons/setting.png', 'Setting'),
               getBottomBarItemTile(1, 'assets/icons/home.png', 'Home'),
-              getBottomBarItemTile(2, 'assets/icons/search.png', 'Notification'),
+              getBottomBarItemTile(2, 'assets/24-7.png', 'Service'),
               getBottomBarItemTile(3, 'assets/icons/profile.png', 'Profile'),
               getBottomBarItemTile(4, 'assets/icons/chat.png', 'Chat'),
             ],

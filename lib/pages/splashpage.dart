@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:women_safety_flutter/pages/online_service/online_service.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
 class Splash extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SplashState extends State<Splash> {
       const Duration(seconds: 3),
           () => Navigator.push(
         context,
+        //MaterialPageRoute(builder: (context) => const OnlineServiceScreen()),
         MaterialPageRoute(builder: (context) => const Onboarding()),
       ),
     );
