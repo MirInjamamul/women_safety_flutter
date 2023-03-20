@@ -226,11 +226,7 @@ class _HomeState extends State<Home> {
                           onservationTrigger(value);
                         });
                       },
-                    )
-                  ]),
-              SettingsSection(
-                  title: Text('Upcoming'),
-                  tiles: [
+                    ),
                     SettingsTile.switchTile(
                       title: Text('Fake ShutDown Mode'),
                       leading: Icon(Icons.phone_android),
@@ -238,9 +234,14 @@ class _HomeState extends State<Home> {
                       onToggle: (value) {
                         setState(() {
                           isShutdownSwitched = value;
+                          fakeShutDownTrigger(value);
                         });
                       },
                     ),
+                  ]),
+              SettingsSection(
+                  title: Text('Upcoming'),
+                  tiles: [
                     SettingsTile.switchTile(
                       title: Text('Fake Airplane Mode'),
                       leading: Icon(Icons.phone_android),
@@ -343,6 +344,24 @@ class _HomeState extends State<Home> {
       _disconnect();
     }
   }
+
+  void fakeShutDownTrigger(bool fakeShutDownSwitch)async{
+    if(fakeShutDownSwitch){
+      _disablePowerButton();
+    }else{
+      _enablePowerButton();
+    }
+  }
+
+  void _disablePowerButton() {
+    debugPrint('FakeShutdown Activated');
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  }
+
+  void _enablePowerButton() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+  }
+
 
   _connect() async {
     String user = "safety";
