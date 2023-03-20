@@ -54,6 +54,8 @@ class _HomeState extends State<Home> {
   @override
   void dispose(){
     _localRenderer.dispose();
+    _localStream = null;
+    _localRenderer.srcObject = null;
     super.dispose();
   }
 
