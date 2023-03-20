@@ -38,12 +38,8 @@ class _BottomBarState extends State<BottomBar> {
         child: (currentIndex == 0)
             ? const Home()
             : (currentIndex == 1)
-            ? const Home()
-            : (currentIndex == 2)
             ? const OnlineServiceScreen()
-            : (currentIndex == 3)
-            ? const Profile()
-            : const Chat(),
+            : const Profile()
       ),
       bottomNavigationBar: Container(
         height: 55.0,
@@ -55,10 +51,9 @@ class _BottomBarState extends State<BottomBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               getBottomBarItemTile(0, 'assets/icons/setting.png', 'Setting'),
-              getBottomBarItemTile(1, 'assets/icons/home.png', 'Home'),
-              getBottomBarItemTile(2, 'assets/24-7.png', 'Service'),
-              getBottomBarItemTile(3, 'assets/icons/profile.png', 'Profile'),
-              getBottomBarItemTile(4, 'assets/icons/chat.png', 'Chat'),
+              getBottomBarItemTile(1, 'assets/24-7.png', 'Service'),
+              getBottomBarItemTile(2, 'assets/icons/profile.png', 'Profile'),
+             // getBottomBarItemTile(3, 'assets/icons/chat.png', 'Chat'),
             ],
           ),
         ),

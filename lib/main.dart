@@ -14,7 +14,7 @@ void main() {
 
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with WidgetsBindingObserver{
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -47,6 +47,13 @@ class MyApp extends StatelessWidget {
       case AppLifecycleState.detached:
         LocalService().logoutXMPP();
         debugPrint('Application Detached');
+        break;
+      case AppLifecycleState.inactive:
+        // TODO: Handle this case.
+        break;
+      case AppLifecycleState.paused:
+        // TODO: Handle this case.
+        break;
     }
   }
 }

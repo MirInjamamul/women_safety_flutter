@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
+import 'package:women_safety_flutter/pages/chat/chat.dart';
 
 import '../../bottom_bar.dart';
 
@@ -113,38 +114,38 @@ class Profile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // detail(
+        //   ontap: () {
+        //     currentIndex = 1;
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const BottomBar()),
+        //     );
+        //   },
+        //   title: 'Matches',
+        //   image: 'assets/icons/matches.png',
+        //   color: blackColor,
+        // ),
+        // detail(
+        //   // ontap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Shortlist())),
+        //   title: 'Shortlisted',
+        //   image: 'assets/icons/star.png',
+        //   color: blackColor,
+        // ),
+        // detail(
+        //   // ontap: () => Navigator.push(
+        //   //   context,
+        //   //   MaterialPageRoute(builder: (context) => const ProfileViews()),
+        //   // ),
+        //   title: 'Profile Views',
+        //   image: 'assets/icons/view.png',
+        //   color: blackColor,
+        // ),
         detail(
-          ontap: () {
-            currentIndex = 1;
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BottomBar()),
-            );
-          },
-          title: 'Matches',
-          image: 'assets/icons/matches.png',
-          color: blackColor,
-        ),
-        detail(
-          // ontap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Shortlist())),
-          title: 'Shortlisted',
-          image: 'assets/icons/star.png',
-          color: blackColor,
-        ),
-        detail(
-          // ontap: () => Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const ProfileViews()),
-          // ),
-          title: 'Profile Views',
-          image: 'assets/icons/view.png',
-          color: blackColor,
-        ),
-        detail(
-          // ontap: () => Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const Chats()),
-          // ),
+          ontap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Chat()),
+          ),
           title: 'Chats',
           image: 'assets/icons/chat.png',
           color: blackColor,

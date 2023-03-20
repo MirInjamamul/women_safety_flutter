@@ -430,6 +430,9 @@ class _HomeState extends State<Home> {
         case CallState.CallStateAudioInvite:
         // TODO: Handle this case.
           break;
+        case CallState.CallStateAudioConnected:
+          // TODO: Handle this case.
+          break;
       }
     };
 

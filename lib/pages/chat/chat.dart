@@ -30,50 +30,49 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
 
 
   List messageList = [
-    {
-      'image': 'assets/users/user11.png',
-      'message': 'Lorem Ipsum is simply dummy text',
-      'time': '11:30',
-      'isMe': false,
-    },
-    {
-      'image': 'assets/users/user1.png',
-      'message':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-      'time': '11:31',
-      'isMe': true,
-    },
-    {
-      'image': 'assets/users/user11.png',
-      'message': 'Ok, Ipsum is simply dummy',
-      'time': '11:33',
-      'isMe': false,
-    },
-    {
-      'image': 'assets/users/user11.png',
-      'message': 'Ok, Ipsum is simply',
-      'time': '11:33',
-      'isMe': false,
-    },
-    {
-      'image': 'assets/users/user1.png',
-      'message':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-      'time': '11:35',
-      'isMe': true,
-    },
-    {
-      'image': 'assets/users/user11.png',
-      'message': 'Lorem Ipsum is simply dummy text',
-      'time': '11:36',
-      'isMe': false,
-    },
-    {
-      'image': 'assets/users/user11.png',
-      'message': '•••••',
-      'time': '11:36',
-      'isMe': false,
-    },
+    // {
+    //   'image': 'assets/users/user11.png',
+    //   'message': 'Lorem Ipsum is simply dummy text',
+    //   'time': '11:30',
+    //   'isMe': false,
+    // },
+    // {
+    //   'image': 'assets/users/user1.png',
+    //   'message': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    //   'time': '11:31',
+    //   'isMe': true,
+    // },
+    // {
+    //   'image': 'assets/users/user11.png',
+    //   'message': 'Ok, Ipsum is simply dummy',
+    //   'time': '11:33',
+    //   'isMe': false,
+    // },
+    // {
+    //   'image': 'assets/users/user11.png',
+    //   'message': 'Ok, Ipsum is simply',
+    //   'time': '11:33',
+    //   'isMe': false,
+    // },
+    // {
+    //   'image': 'assets/users/user1.png',
+    //   'message':
+    //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+    //   'time': '11:35',
+    //   'isMe': true,
+    // },
+    // {
+    //   'image': 'assets/users/user11.png',
+    //   'message': 'Lorem Ipsum is simply dummy text',
+    //   'time': '11:36',
+    //   'isMe': false,
+    // },
+    // {
+    //   'image': 'assets/users/user11.png',
+    //   'message': '•••••',
+    //   'time': '11:36',
+    //   'isMe': false,
+    // },
   ];
 
   @override
@@ -154,10 +153,9 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
         itemCount: messageList.length,
         itemBuilder: (context, index) {
           final item = messageList[index];
-          bool m =
-              (index == 0 || item['time'] != messageList[index - 1]['time'])
-                  ? true
-                  : false;
+          // bool m = (index == 0 || item['time'] != messageList[index - 1]['time'])
+          //         ? true
+          //         : false;
           return item['isMe']! == true
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +165,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                       constraints: const BoxConstraints(maxWidth: 230),
                       margin: EdgeInsets.only(
                         bottom: fixPadding * 2.0,
-                        right: m ? 0 : fixPadding * 4.8,
+                        right: 0,
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: fixPadding * 1.3,
@@ -194,78 +192,74 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                         ],
                       ),
                     ),
-                    m
-                        ? Stack(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: fixPadding),
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage(item['image'] as String),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 8,
-                                child: Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.green,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Container(),
+                    Stack(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(left: fixPadding),
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage(item['image'] as String),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 8,
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: const BoxDecoration(
+                              color: Colors.green,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 )
               : Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    m
-                        ? Stack(
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(right: fixPadding),
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage(item['image'] as String),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                right: 8,
-                                child: Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.green,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Container(),
+                    Stack(
+                      children: [
+                        Container(
+                          margin:
+                          const EdgeInsets.only(right: fixPadding),
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage(item['image'] as String),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 8,
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: const BoxDecoration(
+                              color: Colors.green,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Container(
                       constraints: const BoxConstraints(maxWidth: 230),
                       margin: EdgeInsets.only(
                         bottom: fixPadding * 2.0,
-                        left: m ? 0 : fixPadding * 4.8,
+                        left: 0,
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: fixPadding * 1.3,
@@ -328,7 +322,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
           prefixIcon: const Icon(
             Icons.emoji_emotions_outlined,
             color: greyColor,
-            size: 15,
+            size: 20,
           ),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
@@ -336,14 +330,14 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
             children: [
               const Icon(
                 Icons.attach_file,
-                size: 13,
+                size: 20,
                 color: greyColor,
               ),
               widthSpace,
               widthSpace,
               const Icon(
                 Icons.photo_camera,
-                size: 13,
+                size: 20,
                 color: greyColor,
               ),
               widthSpace,
@@ -363,7 +357,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                 ),
                 child: const Icon(
                   Icons.mic,
-                  size: 11,
+                  size: 20,
                   color: greyColor,
                 ),
               ),
@@ -380,12 +374,10 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                 },
                 child: const Icon(
                   Icons.send_rounded,
-                  size: 13,
+                  size: 20,
                   color: greyColor,
                 ),
               ),
-              widthSpace,
-              widthSpace,
               widthSpace,
               widthSpace,
             ],
