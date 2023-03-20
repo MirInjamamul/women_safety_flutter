@@ -29,6 +29,7 @@ dependencies:
   get: ^4.6.5
   flutter_inset_box_shadow: ^1.0.8
   url_launcher: ^6.1.7
+  xmpp_plugin: ^2.2.2
 
 dev_dependencies:
   flutter_test:

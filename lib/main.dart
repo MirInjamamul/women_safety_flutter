@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:women_safety_flutter/services/local_services.dart';
 
 import 'pages/screens.dart';
 
@@ -34,5 +35,18 @@ class MyApp extends StatelessWidget {
       ),
       home: const Splash(),
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch(state){
+      case AppLifecycleState.resumed:
+        LocalService().getXmppConnection();
+        debugPrint('Application Resumed');
+        break;
+      case AppLifecycleState.detached:
+        LocalService().logoutXMPP();
+        debugPrint('Application Detached');
+    }
   }
 }

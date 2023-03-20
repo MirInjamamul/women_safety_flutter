@@ -88,10 +88,12 @@ class _HomeState extends State<Home> {
         .of(context)
         .size
         .height;
+
     width = MediaQuery
         .of(context)
         .size
         .width;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
