@@ -391,7 +391,16 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
   @override
   void onChatMessage(MessageChat messageChat) {
     // TODO: implement onChatMessage
-    String message = messageChat.body ?? '';
+    String messageText = messageChat.body ?? '';
+    final message = {
+      'image': 'assets/users/user1.png',
+      'message': messageText,
+      'time': time.toString(),
+      'isMe': false,
+    };
+    setState(() {
+      messageList.add(message);
+    });
   }
 
   @override

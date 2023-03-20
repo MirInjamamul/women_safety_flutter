@@ -26,6 +26,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
+        leading: const SizedBox(),
         title: const Text('Online Service', style: TextStyle(color: Colors.black),),
       ),
       body: SafeArea(
