@@ -1,4 +1,13 @@
 import 'package:women_safety_flutter/pages/screens.dart';
+import 'package:xmpp_plugin/error_response_event.dart';
+import 'package:xmpp_plugin/models/chat_state_model.dart';
+import 'package:xmpp_plugin/models/connection_event.dart';
+import 'package:xmpp_plugin/models/message_model.dart';
+import 'package:xmpp_plugin/models/present_mode.dart';
+import 'package:xmpp_plugin/success_response_event.dart';
+import 'package:xmpp_plugin/xmpp_plugin.dart';
+
+import '../../services/local_services.dart';
 
 class Chat extends StatefulWidget {
   const Chat({Key? key}) : super(key: key);
@@ -7,10 +16,18 @@ class Chat extends StatefulWidget {
   State<Chat> createState() => _ChatState();
 }
 
-class _ChatState extends State<Chat> {
+class _ChatState extends State<Chat>  with WidgetsBindingObserver implements DataChangeEvents{
   final messageController = TextEditingController();
   String? _currentMessage;
   DateTime time = DateTime.now();
+
+  //XMPP
+  static late XmppConnection flutterXmpp;
+  List<MessageChat> events = [];
+  List<PresentModel> presentModel = [];
+  String connectionStatus = "DisConnected";
+  String connectionStatusMessage = "";
+
 
   List messageList = [
     {
@@ -58,6 +75,26 @@ class _ChatState extends State<Chat> {
       'isMe': false,
     },
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    XmppConnection.addListener(this);
+    setConnection();
+
+    WidgetsBinding.instance.addObserver(this);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    XmppConnection.removeListener(this);
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -338,6 +375,8 @@ class _ChatState extends State<Chat> {
                   setState(() {
                     messageList.add(message);
                   });
+
+                  sendMessage(message['message'].toString());
                 },
                 child: const Icon(
                   Icons.send_rounded,
@@ -355,5 +394,53 @@ class _ChatState extends State<Chat> {
         ),
       ),
     );
+  }
+
+  @override
+  void onChatMessage(MessageChat messageChat) {
+    // TODO: implement onChatMessage
+  }
+
+  @override
+  void onChatStateChange(ChatState chatState) {
+    // TODO: implement onChatStateChange
+  }
+
+  @override
+  void onConnectionEvents(ConnectionEvent connectionEvent) {
+    // TODO: implement onConnectionEvents
+  }
+
+  @override
+  void onGroupMessage(MessageChat messageChat) {
+    // TODO: implement onGroupMessage
+  }
+
+  @override
+  void onNormalMessage(MessageChat messageChat) {
+    // TODO: implement onNormalMessage
+  }
+
+  @override
+  void onPresenceChange(PresentModel message) {
+    // TODO: implement onPresenceChange
+  }
+
+  @override
+  void onSuccessEvent(SuccessResponseEvent successResponseEvent) {
+    // TODO: implement onSuccessEvent
+  }
+
+  @override
+  void onXmppError(ErrorResponseEvent errorResponseEvent) {
+    // TODO: implement onXmppError
+  }
+
+  void sendMessage(String message){
+    flutterXmpp.sendMessageWithType('police@bamboojs.com', message, 'id', DateTime.now().millisecondsSinceEpoch);
+  }
+
+  void setConnection() async{
+    flutterXmpp = (await LocalService().getXmppConnection())!;
   }
 }

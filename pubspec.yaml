@@ -41,6 +41,7 @@ dependencies:
   path_provider: ^2.0.11
   flutter_webrtc: ^0.8.7
   beacon_broadcast: ^0.3.1
+  xmpp_plugin: ^2.2.2
 
 dev_dependencies:
   flutter_test:
