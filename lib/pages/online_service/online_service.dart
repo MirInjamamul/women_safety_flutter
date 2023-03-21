@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:women_safety_flutter/pages/ambulance/ambulance_screen.dart';
 import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/emergencyService/emergency_service.dart';
@@ -18,8 +20,8 @@ class OnlineServiceScreen extends StatefulWidget {
 class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
 
 
-  final List<String> _iconList = [Images.fireService,Images.ambulance, Images.police, Images.emergencyService, Images.complain, Images.eSeva];
-  final List<String> _titleList = ["ফায়ার সার্ভিস","অ্যাম্বুলেন্স", "থানা পুলিশ","জরুরী সেবা", "অভিযোগ", "ই-পরিষেবা"];
+  final List<String> _iconList = [Images.fireService,Images.ambulance, Images.police, Images.emergencyService, Images.hospital, Images.eSeva];
+  final List<String> _titleList = ["ফায়ার সার্ভিস","অ্যাম্বুলেন্স", "থানা পুলিশ","জরুরী সেবা", "হাসপাতাল", "ই-পরিষেবা"];
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,37 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
-        centerTitle: true,
+        leadingWidth: 0,
         leading: const SizedBox(),
-        title: const Text('Online Service', style: TextStyle(color: Colors.black),),
+        title: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-2,-4),
+                  blurRadius: 1,
+                  inset: false,
+
+                ),
+                BoxShadow(
+                  color: Color(0xFFA7A9AF),
+                  offset: Offset(2,2),
+                  blurRadius: 1,
+                  spreadRadius: 1,
+                  inset: false,
+                ),
+              ]
+          ),
+          child: const Text('অনলাইন পরিষেবা',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
       ),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -69,7 +98,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
                             Get.to(_screenList[index]);
                             break;
                           case 4:
-                            Get.to(_screenList[index]);
+                            showCustomToast('Coming soon...');
                             break;
                           case 5:
                             showCustomToast('Coming soon...');

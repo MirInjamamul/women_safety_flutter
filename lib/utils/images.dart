@@ -12,4 +12,5 @@ class Images{
    static String fire = 'assets/campfire.png';
    static String call = 'assets/phone-call.png';
    static String help = 'assets/help.png';
+   static String profile = 'assets/users/user6.png';
 }
