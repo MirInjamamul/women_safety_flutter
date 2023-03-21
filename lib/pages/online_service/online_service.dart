@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:women_safety_flutter/pages/ambulance/ambulance_screen.dart';
+import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/emergencyService/emergency_service.dart';
 import 'package:women_safety_flutter/pages/fire_service/fire_service_screen.dart';
 import 'package:women_safety_flutter/pages/thana/thana_screen.dart';
@@ -17,8 +18,8 @@ class OnlineServiceScreen extends StatefulWidget {
 class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
 
 
-  final List<String> _iconList = [Images.fireService,Images.ambulance, Images.police, Images.emergencyService, Images.hospital, Images.eSeva];
-  final List<String> _titleList = ["ফায়ার সার্ভিস","অ্যাম্বুলেন্স", "থানা পুলিশ","জরুরী সেবা", "হাসপাতাল", "ই-পরিষেবা"];
+  final List<String> _iconList = [Images.fireService,Images.ambulance, Images.police, Images.emergencyService, Images.complain, Images.eSeva];
+  final List<String> _titleList = ["ফায়ার সার্ভিস","অ্যাম্বুলেন্স", "থানা পুলিশ","জরুরী সেবা", "অভিযোগ", "ই-পরিষেবা"];
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
+        centerTitle: true,
         leading: const SizedBox(),
         title: const Text('Online Service', style: TextStyle(color: Colors.black),),
       ),
@@ -33,7 +35,12 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
         child: Column(
           children: [
 
-            Center(child: Image.asset('assets/Women-safety-UAE.png', height: 100, width: 100,)),
+            Center(child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset('assets/logo_main.png', height: 100, width: double.infinity-10, fit: BoxFit.cover,)),
+            )),
 
             Expanded(
               child: GridView.builder(
@@ -62,7 +69,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
                             Get.to(_screenList[index]);
                             break;
                           case 4:
-                            showCustomToast('Coming soon...');
+                            Get.to(_screenList[index]);
                             break;
                           case 5:
                             showCustomToast('Coming soon...');
@@ -115,7 +122,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     /// for hospital
     const EmergencyServiceScreen(),
     /// for thana
-    Container(color: Colors.red,),
+    const ComplainScreen(),
     /// for e-service
     Container(color: Colors.green,),
   ];

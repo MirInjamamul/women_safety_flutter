@@ -163,7 +163,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                   children: [
                     Container(
                       constraints: const BoxConstraints(maxWidth: 230),
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                         bottom: fixPadding * 2.0,
                         right: 0,
                       ),
@@ -391,16 +391,18 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
   @override
   void onChatMessage(MessageChat messageChat) {
     // TODO: implement onChatMessage
-    String messageText = messageChat.body ?? '';
-    final message = {
-      'image': 'assets/users/user1.png',
-      'message': messageText,
-      'time': time.toString(),
-      'isMe': false,
-    };
-    setState(() {
-      messageList.add(message);
-    });
+    if(!messageChat.type!.contains('Ack')){
+      String messageText = messageChat.body ?? '';
+      final message = {
+        'image': 'assets/users/user5.png',
+        'message': messageText,
+        'time': time.toString(),
+        'isMe': false,
+      };
+      setState(() {
+        messageList.add(message);
+      });
+    }
   }
 
   @override
