@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:women_safety_flutter/pages/ambulance/ambulance_screen.dart';
+import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/emergencyService/emergency_service.dart';
 import 'package:women_safety_flutter/pages/fire_service/fire_service_screen.dart';
 import 'package:women_safety_flutter/pages/thana/thana_screen.dart';
@@ -26,14 +29,47 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
+        leadingWidth: 0,
         leading: const SizedBox(),
-        title: const Text('Online Service', style: TextStyle(color: Colors.black),),
+        title: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-2,-4),
+                  blurRadius: 1,
+                  inset: false,
+
+                ),
+                BoxShadow(
+                  color: Color(0xFFA7A9AF),
+                  offset: Offset(2,2),
+                  blurRadius: 1,
+                  spreadRadius: 1,
+                  inset: false,
+                ),
+              ]
+          ),
+          child: const Text('অনলাইন পরিষেবা',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
       ),
+
       body: SafeArea(
         child: Column(
           children: [
 
-            Center(child: Image.asset('assets/Women-safety-UAE.png', height: 100, width: 100,)),
+            Center(child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset('assets/logo_main.png', height: 100, width: double.infinity-10, fit: BoxFit.cover,)),
+            )),
 
             Expanded(
               child: GridView.builder(
@@ -115,7 +151,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     /// for hospital
     const EmergencyServiceScreen(),
     /// for thana
-    Container(color: Colors.red,),
+    const ComplainScreen(),
     /// for e-service
     Container(color: Colors.green,),
   ];

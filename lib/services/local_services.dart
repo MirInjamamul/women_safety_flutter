@@ -13,8 +13,7 @@ class LocalService {
 
     if (xmppClient != null) {
       debugPrint("calling xmpp");
-      XmppConnectionState? connectionStatus = await xmppClient
-          ?.getConnectionStatus();
+      XmppConnectionState? connectionStatus = await xmppClient?.getConnectionStatus();
 
       debugPrint("XMPP-STATE ${connectionStatus.toString()}");
 

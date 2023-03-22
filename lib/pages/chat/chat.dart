@@ -1,4 +1,5 @@
 import 'package:women_safety_flutter/pages/screens.dart';
+import 'package:women_safety_flutter/services/local_services.dart';
 import 'package:xmpp_plugin/error_response_event.dart';
 import 'package:xmpp_plugin/models/chat_state_model.dart';
 import 'package:xmpp_plugin/models/connection_event.dart';
@@ -7,7 +8,6 @@ import 'package:xmpp_plugin/models/present_mode.dart';
 import 'package:xmpp_plugin/success_response_event.dart';
 import 'package:xmpp_plugin/xmpp_plugin.dart';
 
-import '../../services/local_services.dart';
 
 class Chat extends StatefulWidget {
   const Chat({Key? key}) : super(key: key);
@@ -78,6 +78,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
   @override
   void initState() {
     // TODO: implement initState
+
 
     XmppConnection.addListener(this);
     setConnection();
@@ -163,7 +164,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
                   children: [
                     Container(
                       constraints: const BoxConstraints(maxWidth: 230),
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                         bottom: fixPadding * 2.0,
                         right: 0,
                       ),
@@ -391,16 +392,18 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
   @override
   void onChatMessage(MessageChat messageChat) {
     // TODO: implement onChatMessage
-    String messageText = messageChat.body ?? '';
-    final message = {
-      'image': 'assets/users/user1.png',
-      'message': messageText,
-      'time': time.toString(),
-      'isMe': false,
-    };
-    setState(() {
-      messageList.add(message);
-    });
+    if(!messageChat.type!.contains('Ack')){
+      String messageText = messageChat.body ?? '';
+      final message = {
+        'image': 'assets/users/user5.png',
+        'message': messageText,
+        'time': time.toString(),
+        'isMe': false,
+      };
+      setState(() {
+        messageList.add(message);
+      });
+    }
   }
 
   @override

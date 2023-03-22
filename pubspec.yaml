@@ -30,6 +30,9 @@ dependencies:
   flutter_inset_box_shadow: ^1.0.8
   url_launcher: ^6.1.7
   xmpp_plugin: ^2.2.2
+  dropdown_button2: ^1.8.9
+  intl: ^0.18.0
+  images_picker: ^1.2.11
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,10 @@
 import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:women_safety_flutter/custom_appbar.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 import 'package:settings_ui/settings_ui.dart';
+
 
 
 
@@ -97,13 +99,8 @@ class _HomeState extends State<Home> {
         .width;
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Settings',
-          style: black20BoldTextStyle,
-        ),
-      ),
+      backgroundColor: const Color(0xFFE7ECEF),
+      appBar: const CustomAppBar(title: 'সেটিংস',),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(vertical: fixPadding * 2.0),
@@ -166,7 +163,7 @@ class _HomeState extends State<Home> {
                       ),
                       color: primaryColor,
                       child: Text(
-                        'Basic',
+                        'বেসিক',
                         style: white13RegularTextStyle,
                       ),
                     ),
@@ -183,7 +180,7 @@ class _HomeState extends State<Home> {
                           vertical: 3,
                         ),
                         child: Text(
-                          'Upgrade plan',
+                          'আপগ্রেড প্ল্যান',
                           style: primaryColor13RegularTextStyle,
                         ),
                       ),
@@ -201,16 +198,16 @@ class _HomeState extends State<Home> {
   featureSettings() {
     return Column(
       children: [
-        title('Security Features'),
+        title('সিকিউরিটি ফীচার'),
         SizedBox(
           height: height * .55,
           child: SettingsList(
             sections: [
               SettingsSection(
-                  title: Text('Emergency'),
+                  title: Text('ইমার্জেন্সি'),
                   tiles: [
                     SettingsTile.switchTile(
-                      title: Text('Panic Trigger'),
+                      title: Text('প্যানিক ট্রিগার'),
                       leading: Icon(Icons.health_and_safety),
                       initialValue: isPanicSwitched,
                       onToggle: (value) {
@@ -221,7 +218,7 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     SettingsTile.switchTile(
-                      title: const Text('Observation Trigger'),
+                      title: const Text('অবসেরভেশন ট্রিগার'),
                       leading: const Icon(Icons.video_call),
                       initialValue: isObservationSwitched,
                       onToggle: (value) {
@@ -232,7 +229,7 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     SettingsTile.switchTile(
-                      title: Text('Fake ShutDown Mode'),
+                      title: Text('বিরতিহীন শাটডাউন মোড'),
                       leading: Icon(Icons.phone_android),
                       initialValue: isShutdownSwitched,
                       onToggle: (value) {
@@ -244,11 +241,11 @@ class _HomeState extends State<Home> {
                     ),
                   ]),
               SettingsSection(
-                  title: Text('Upcoming'),
+                  title: Text('নতুন '),
                   tiles: [
                     SettingsTile.switchTile(
-                      title: Text('Fake Airplane Mode'),
-                      leading: Icon(Icons.phone_android),
+                      title: const Text('ফ্যাক  এরোপ্লেন মোড'),
+                      leading: const Icon(Icons.phone_android),
                       initialValue: isAirplaneSwitched,
                       onToggle: (value) {
                         setState(() {
@@ -258,10 +255,10 @@ class _HomeState extends State<Home> {
                     ),
                   ]),
               SettingsSection(
-                  title: Text('Contacts'),
+                  title: Text('কন্টাক্ট'),
                   tiles: [
                     SettingsTile(
-                      title: Text('Notify Number'),
+                      title: Text('কল করুন '),
                       leading: Icon(Icons.phone),
                       onPressed: (BuildContext context) {
                         insert_numbers();
@@ -291,7 +288,7 @@ class _HomeState extends State<Home> {
             style: black16BoldTextStyle,
           ),
           Text(
-            'See all',
+            'সবগুলো',
             style: primaryColor12BlackTextStyle,
           ),
         ],

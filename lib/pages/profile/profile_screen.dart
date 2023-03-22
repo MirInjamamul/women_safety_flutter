@@ -1,20 +1,48 @@
-import 'package:flutter/material.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:women_safety_flutter/utils/custom_toast.dart';
+import 'package:women_safety_flutter/utils/images.dart';
 
-import '../../bottom_bar.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const bg = Color(0xFFE7ECEF);
     return Scaffold(
+      backgroundColor: bg,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Profile',
-          style: black20BoldTextStyle,
+        leadingWidth: 0,
+        leading: const SizedBox(),
+        title: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-2,-4),
+                  blurRadius: 1,
+                  inset: false,
+
+                ),
+                BoxShadow(
+                  color: Color(0xFFA7A9AF),
+                  offset: Offset(2,2),
+                  blurRadius: 1,
+                  spreadRadius: 1,
+                  inset: false,
+                ),
+              ]
+          ),
+          child: const Text('প্রোফাইল',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
       body: ListView(
@@ -46,17 +74,7 @@ class Profile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                image: const DecorationImage(
-                  image: AssetImage('assets/users/user1.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            Image.asset(Images.profile, width: 100, height: 100,),
             widthSpace,
             widthSpace,
             widthSpace,
@@ -65,7 +83,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Azhar Khan',
+                  'Nila Khan',
                   style: black16BoldTextStyle,
                 ),
                 Text(
@@ -91,7 +109,7 @@ class Profile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
-                      'Upgrade plan',
+                      'আপগ্রেড প্ল্যান',
                       style: white14SemiBoldTextStyle,
                     ),
                   ),
@@ -146,7 +164,7 @@ class Profile extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const Chat()),
           ),
-          title: 'Chats',
+          title: 'চ্যাট',
           image: 'assets/icons/chat.png',
           color: blackColor,
         ),
@@ -155,7 +173,7 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const Notifications()),
           // ),
-          title: 'Notifications',
+          title: 'নোটিফিকেশন',
           image: 'assets/icons/notification.png',
           color: blackColor,
         ),
@@ -164,7 +182,7 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const SubscriptionPaln()),
           // ),
-          title: 'Subscription Plans',
+          title: 'সাবস্ক্রিপশন প্ল্যান',
           image: 'assets/icons/subscribe.png',
           color: blackColor,
         ),
@@ -173,21 +191,26 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const Settings()),
           // ),
-          title: 'Settings',
+          title: 'সেটিং',
           image: 'assets/icons/setting.png',
           color: blackColor,
         ),
         detail(
           ontap: () {},
-          title: 'Terms & Conditions',
+          title: 'টার্ম & কন্ডিশন',
           image: 'assets/icons/condition.png',
           color: blackColor,
         ),
-        heightSpace,
+        detail(
+          ontap: () => showCustomToast('শীঘ্রই আসছে..'),
+          title: 'ভাষা',
+          image: 'assets/icons/sort.png',
+          color: blackColor,
+        ),
         heightSpace,
         detail(
           ontap: () => logoutDialog(context),
-          title: 'Logout',
+          title: 'লগ আউট',
           image: 'assets/icons/logout.png',
           color: primaryColor,
         ),

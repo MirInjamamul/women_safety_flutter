@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
+import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/online_service/online_service.dart';
 import 'package:women_safety_flutter/pages/profile/profile_screen.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
@@ -39,6 +40,8 @@ class _BottomBarState extends State<BottomBar> {
             ? const Home()
             : (currentIndex == 1)
             ? const OnlineServiceScreen()
+            : (currentIndex == 2)
+            ? const ComplainScreen()
             : const Profile()
       ),
       bottomNavigationBar: Container(
@@ -50,9 +53,10 @@ class _BottomBarState extends State<BottomBar> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              getBottomBarItemTile(0, 'assets/icons/setting.png', 'Setting'),
-              getBottomBarItemTile(1, 'assets/24-7.png', 'Service'),
-              getBottomBarItemTile(2, 'assets/icons/profile.png', 'Profile'),
+              getBottomBarItemTile(0, 'assets/icons/setting.png', 'সেটিং'),
+              getBottomBarItemTile(1, 'assets/24-7.png', 'সেবা'),
+              getBottomBarItemTile(2, 'assets/box.png', 'অভিযোগ'),
+              getBottomBarItemTile(3, 'assets/icons/profile.png', 'প্রোফাইল'),
              // getBottomBarItemTile(3, 'assets/icons/chat.png', 'Chat'),
             ],
           ),
