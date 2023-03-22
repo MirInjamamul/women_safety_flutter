@@ -1,4 +1,5 @@
 import 'package:women_safety_flutter/pages/screens.dart';
+import 'package:women_safety_flutter/services/local_services.dart';
 import 'package:xmpp_plugin/error_response_event.dart';
 import 'package:xmpp_plugin/models/chat_state_model.dart';
 import 'package:xmpp_plugin/models/connection_event.dart';
@@ -7,7 +8,6 @@ import 'package:xmpp_plugin/models/present_mode.dart';
 import 'package:xmpp_plugin/success_response_event.dart';
 import 'package:xmpp_plugin/xmpp_plugin.dart';
 
-import '../../services/local_services.dart';
 
 class Chat extends StatefulWidget {
   const Chat({Key? key}) : super(key: key);
@@ -78,6 +78,7 @@ class _ChatState extends State<Chat>  with WidgetsBindingObserver implements Dat
   @override
   void initState() {
     // TODO: implement initState
+
 
     XmppConnection.addListener(this);
     setConnection();

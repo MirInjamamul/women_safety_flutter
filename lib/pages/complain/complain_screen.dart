@@ -106,7 +106,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
           child: Column( crossAxisAlignment: CrossAxisAlignment.center, mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 40,),
-              const Text('আপনার স্বাধীনভাবে আপনার মতামত প্রকাশ করুন', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),
+              const Text('আপনি স্বাধীনভাবে আপনার মতামত প্রকাশ করুন', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),
               const SizedBox(height: 40,),
 
               Container(
