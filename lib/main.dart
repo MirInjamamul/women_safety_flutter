@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:women_safety_flutter/services/local_services.dart';
 
 import 'pages/screens.dart';
+import 'helper/di_init.dart' as di;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
-  ).then((_){
+  ).then((_) async {
+    await di.init();
     runApp(const MyApp());
   });
 

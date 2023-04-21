@@ -1,4 +1,7 @@
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
+
+import '../../controllers/auth_controller.dart';
 
 // ignore: must_be_immutable
 class Signup extends StatefulWidget {
@@ -12,104 +15,113 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final username_controller = TextEditingController();
   final password_controller = TextEditingController();
+  final email_controller = TextEditingController();
+  final mobile_controller = TextEditingController();
 
   @override
   void dispose() {
     // TODO: implement dispose
     username_controller.dispose();
     password_controller.dispose();
+    email_controller.dispose();
+    mobile_controller.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: primaryColor,
-        image: DecorationImage(
-          image: AssetImage('assets/bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          titleSpacing: 0,
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: whiteColor,
+    return Scaffold(
+      body: GetBuilder<AuthController>(builder: (auth) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: primaryColor,
+            image: DecorationImage(
+              image: AssetImage('assets/bg.png'),
+              fit: BoxFit.cover,
             ),
           ),
-          title: Text(
-            'Sign Up',
-            style: white20BoldTextStyle,
-          ),
-        ),
-        body: ListView(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: fixPadding * 2.0),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: fixPadding * 2.0,
-                      vertical: fixPadding * 3.5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        nameTextField(),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        emailTextField(),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        mobileNumberTextField(),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        passwordTextField(),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        confirmPasswordTextField(),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        otherOptions(context),
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        heightSpace,
-                        signupButton(context),
-                      ],
-                    ),
-                  ),
-                ],
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              titleSpacing: 0,
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: whiteColor,
+                ),
+              ),
+              title: Text(
+                'Sign Up',
+                style: white20BoldTextStyle,
               ),
             ),
-          ],
-        ),
-      ),
+            body: ListView(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height - 120,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: fixPadding * 2.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: fixPadding * 2.0,
+                          vertical: fixPadding * 3.5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            nameTextField(),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            emailTextField(),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            mobileNumberTextField(),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            passwordTextField(),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            confirmPasswordTextField(),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            otherOptions(context),
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            heightSpace,
+                            signupButton(context, auth),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -160,6 +172,7 @@ class _SignupState extends State<Signup> {
         keyboardType: TextInputType.emailAddress,
         cursorColor: primaryColor,
         style: black15SemiBoldTextStyle,
+        controller: email_controller,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
@@ -189,6 +202,7 @@ class _SignupState extends State<Signup> {
         keyboardType: TextInputType.phone,
         cursorColor: primaryColor,
         style: black15SemiBoldTextStyle,
+        controller: mobile_controller,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
@@ -348,18 +362,31 @@ class _SignupState extends State<Signup> {
     );
   }
 
-  signupButton(context) {
+
+
+  
+  signupButton(context, AuthController authController) {
     return InkWell(
       //TODO push to BottomBar
       onTap: (){
+        _checkControl();
 
-        saveData();
-        currentIndex = 0;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const BottomBar()),
-        );
+        authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
+          if(status.isSuccess!){
+            debugPrint("Success");
+
+            // saveData();
+            // currentIndex = 0;
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => const BottomBar()),
+            // );
+
+          }else{
+            debugPrint("Failed");
+          }
+        });
 
       },
 
@@ -391,4 +418,8 @@ class _SignupState extends State<Signup> {
       prefs.setString('password', password_controller.text);
 
     }
+
+  void _checkControl() {
+  //  TODO need to check control of input fields
+  }
 }
