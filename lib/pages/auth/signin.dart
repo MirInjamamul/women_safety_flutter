@@ -2,6 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
 // ignore: must_be_immutable
@@ -28,81 +30,86 @@ class _SigninState extends State<Signin> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: primaryColor,
-        image: DecorationImage(
-          image: AssetImage('assets/bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: WillPopScope(
-        onWillPop: () async {
-          bool backStatus = onWillPop();
-          if (backStatus) {
-            exit(0);
-          }
-          return false;
-        },
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Sign In',
-              style: white20BoldTextStyle,
+    return Scaffold(
+      body: GetBuilder<AuthController>(builder: (auth){
+        return Container(
+          decoration: const BoxDecoration(
+            color: primaryColor,
+            image: DecorationImage(
+              image: AssetImage('assets/bg.png'),
+              fit: BoxFit.cover,
             ),
           ),
-          body: ListView(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height - 120,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: fixPadding * 2.0),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: fixPadding * 2.0,
-                        vertical: fixPadding * 3.5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          nameTextField(),
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          passwordTextField(),
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          otherOptions(context),
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          heightSpace,
-                          signinButton(context),
-                        ],
-                      ),
-                    ),
-                  ],
+          child: WillPopScope(
+            onWillPop: () async {
+              bool backStatus = onWillPop();
+              if (backStatus) {
+                exit(0);
+              }
+              return false;
+            },
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                title: Text(
+                  'Sign In',
+                  style: white20BoldTextStyle,
                 ),
               ),
-            ],
+              body: ListView(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height - 120,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: fixPadding * 2.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: fixPadding * 2.0,
+                            vertical: fixPadding * 3.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              nameTextField(),
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              passwordTextField(),
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              otherOptions(context),
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              heightSpace,
+                              signinButton(context, auth),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
+
   }
 
   onWillPop() {
@@ -281,11 +288,11 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  signinButton(context) {
+  signinButton(context, AuthController auth) {
     return InkWell(
       onTap: () {
         //TODO login with email and password
-        checkUserLogin();
+        checkUserLogin(auth);
       },
       child: Container(
         padding: const EdgeInsets.all(fixPadding * 1.5),
@@ -302,10 +309,10 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  void checkUserLogin() async{
+  void checkUserLogin(AuthController authController) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if(prefs.getString('username')!.contains(username_controller.text) && prefs.getString('password')!.contains(password_controller.text)){
+    if(prefs.getString('username') != null && prefs.getString('username')! .contains(username_controller.text) && prefs.getString('password')!.contains(password_controller.text)){
       Fluttertoast.showToast(
           msg: "Login Successful",
           toastLength: Toast.LENGTH_SHORT,
@@ -324,15 +331,38 @@ class _SigninState extends State<Signin> {
       );
 
     }else{
-      Fluttertoast.showToast(
-          msg: "Wrong Username and Password",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+
+      authController.signIn(username_controller.text, password_controller.text).then((status) {
+        if(status.isSuccess!){
+          Fluttertoast.showToast(
+              msg: "Login Successful",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+
+          currentIndex = 0;
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BottomBar()),
+          );
+
+        }else{
+          Fluttertoast.showToast(
+              msg: status.message!,
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+        }
+      });
     }
   }
 }

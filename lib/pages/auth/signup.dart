@@ -375,13 +375,13 @@ class _SignupState extends State<Signup> {
           if(status.isSuccess!){
             debugPrint("Success");
 
-            // saveData();
-            // currentIndex = 0;
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => const BottomBar()),
-            // );
+            saveData();
+            currentIndex = 0;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const BottomBar()),
+            );
 
           }else{
             debugPrint("Failed");

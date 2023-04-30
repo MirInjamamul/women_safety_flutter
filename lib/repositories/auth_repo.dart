@@ -11,21 +11,6 @@ class AuthRepo{
 
   AuthRepo({required this.apiClient, required this.sharedPreferences});
 
-  Future<Response> loginWithPhone(
-      {required String phone}) async {
-    return await apiClient.postData(ApiConfig.signInWithPhoneUri, {"phone_number": phone, "type": 0});
-  }
-
-  Future<Response> signUpWithPhone(
-      {required String phone, required String fname,required String lname}) async {
-    return await apiClient.postData(ApiConfig.signUpWithPhoneUri, {"phone_number": phone, "type": 0, "first_name": fname, "last_name": lname});
-  }
-
-  Future<Response> loginWithEmail(
-      {required String email, required String password}) async {
-    return await apiClient.postData(ApiConfig.loginWithEmailUri, {"email": email, "type":0, "password": password});
-  }
-
   Future<Response> signUp(
       {required String email, required String password, required String username, required String mobile}) async {
     return await apiClient.postData(ApiConfig.signUpUri, {
@@ -36,22 +21,9 @@ class AuthRepo{
     });
   }
 
-  Future<Response> checkOTP(
-      {required String otp, required String phone}
-      )async{
-    return await apiClient.postData(ApiConfig.phoneConfirmation, {"phone_number": phone, "verification_number": otp});
-  }
-
-  Future<Response> checkOTPEmail(
-      {required String otp, required String email}
-      )async{
-    return await apiClient.postData(ApiConfig.emailConfirmationUri, {"email": email, "verification_number": otp});
-  }
-
-  Future<Response> updateUserInfo(
-      {required String first, required String last, required String phone}
-      )async{
-    return await apiClient.postData(ApiConfig.updateInfoByPhoneUri1+phone+ApiConfig.updateInfoByPhoneUri2, {"first_name": first, "last_name": last});
+  Future<Response> signIn(
+      {required String email}) async {
+    return await apiClient.getData(ApiConfig.signInUri+email);
   }
 
   Future<bool> saveUserToken(String token) async{
