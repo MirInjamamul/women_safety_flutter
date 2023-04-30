@@ -15,4 +15,8 @@ class ApiConfig{
   static const String signUpUri = "/users";
   static const String signInUri = "/users/";
 
+//  Complain
+  static const String createComplainUri = "/complain";
+  static const String getComplainsUri = "/complains";
+
 }

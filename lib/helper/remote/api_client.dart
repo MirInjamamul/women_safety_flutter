@@ -146,4 +146,44 @@ class ApiClient extends GetConnect implements GetxService{
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
+
+  Future<Response> deleteData(
+      String uri, {
+        Map<String, dynamic>? query,
+        String? contentType,
+        Map<String, String>? headers,
+        Function(dynamic)? decoder,
+      }) async {
+    try {
+      if (Foundation.kDebugMode) {
+        debugPrint('====> GetX Call: $uri\nToken: $token');
+      }
+      DateTime time = DateTime.now();
+      var loggerRespRcvTime = time.millisecondsSinceEpoch;
+      Response response = await delete(
+        uri,
+        contentType: contentType,
+        query: query,
+        headers: headers ?? _mainHeaders,
+        decoder: decoder,
+      );
+      var link =  baseUrl.toString()  + uri + query.toString();
+      // Get.find<LoggerController>().
+      // saveLog(link, response.statusCode ?? -10  ,response: response.bodyString , isTimeOut: false ,
+      // loggerRespSendTime: loggerRespRcvTime , reqType: "GET" );
+
+
+      response = handleResponse(response);
+
+      if (Foundation.kDebugMode) {
+        debugPrint(
+            '====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
+        debugPrint(
+            '====> GetX Response: [${_mainHeaders}] $uri\n${response.body}');
+      }
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
 }
