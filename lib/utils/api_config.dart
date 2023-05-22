@@ -17,6 +17,6 @@ class ApiConfig{
 
 //  Complain
   static const String createComplainUri = "/complain";
-  static const String getComplainsUri = "/complains";
+
 
 }

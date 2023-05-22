@@ -24,33 +24,20 @@ class ComplainController extends GetxController{
     return responseModel;
   }
 
-  Future<ResponseModel> getAllComplain()async{
-    Response response = await complainRepo.getAllComplain();
-    ResponseModel responseModel;
 
-    if(response.statusCode == 200){
-      Map map = response.body;
 
-      responseModel = ResponseModel(true, 'Complain Fetched');
-    }else{
-      responseModel = ResponseModel(false, 'Internal Server Error');
-    }
-
-    return responseModel;
-  }
-
-  Future<ResponseModel> deleteComplain(int id)async{
-    Response response = await complainRepo.deleteComplain(id);
-    ResponseModel responseModel;
-
-    if(response.statusCode == 200){
-      Map map = response.body;
-
-      responseModel = ResponseModel(true, 'Complain Submitted');
-    }else{
-      responseModel = ResponseModel(false, 'Internal Server Error');
-    }
-
-    return responseModel;
-  }
+  // Future<ResponseModel> deleteComplain(int id)async{
+  //   Response response = await complainRepo.deleteComplain(id);
+  //   ResponseModel responseModel;
+  //
+  //   if(response.statusCode == 200){
+  //     Map map = response.body;
+  //
+  //     responseModel = ResponseModel(true, 'Complain Submitted');
+  //   }else{
+  //     responseModel = ResponseModel(false, 'Internal Server Error');
+  //   }
+  //
+  //   return responseModel;
+  // }
 }

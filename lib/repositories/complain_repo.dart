@@ -21,12 +21,10 @@ class ComplainRepo{
     });
   }
 
-  Future<Response> getAllComplain() async {
-    return await apiClient.getData(ApiConfig.getComplainsUri);
-  }
 
-  Future<Response> deleteComplain(int id) async {
-    return await apiClient.getData(ApiConfig.getComplainsUri+id.toString());
-  }
+
+  // Future<Response> deleteComplain(int id) async {
+  //   return await apiClient.getData(ApiConfig.getComplainsUri+id.toString());
+  // }
 
 }
