@@ -6,8 +6,10 @@ import 'package:women_safety_flutter/controllers/complain_controller.dart';
 import 'package:women_safety_flutter/helper/remote/api_client.dart';
 
 import '../controllers/auth_controller.dart';
+import '../controllers/home_controller.dart';
 import '../repositories/auth_repo.dart';
 import '../repositories/complain_repo.dart';
+import '../repositories/home_repo.dart';
 import '../utils/api_config.dart';
 
 Future<void> init() async{
@@ -19,8 +21,12 @@ Future<void> init() async{
 //  Repository
   Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => ComplainRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => HomeRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+
 
   /// Controller
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => ComplainController(complainRepo: Get.find()));
+  Get.lazyPut(() => HomeController(homeRepo: Get.find()));
+
 }

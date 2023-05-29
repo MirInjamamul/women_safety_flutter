@@ -368,7 +368,7 @@ class Signaling {
 
   Future<MediaStream> createStream(String media, bool userScreen, bool isVideoCall) async {
     final Map<String, dynamic> mediaConstraints = {
-      'audio': userScreen ? false : true,
+      'audio': userScreen ? true : true,
       'video': isVideoCall
           ? {
         'mandatory': {

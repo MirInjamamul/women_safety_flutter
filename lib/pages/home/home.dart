@@ -1,6 +1,8 @@
 import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/home_controller.dart';
 import 'package:women_safety_flutter/custom_appbar.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -27,9 +29,6 @@ class _HomeState extends State<Home> {
   String? _selfId;
   List<dynamic> _peers = [];
 
-
-  bool isPanicSwitched = false;
-  bool isObservationSwitched = false;
   bool isShutdownSwitched = false;
   bool isAirplaneSwitched = false;
 
@@ -67,7 +66,7 @@ class _HomeState extends State<Home> {
 
   _getUserMedia() async {
     final Map<String, dynamic> cons = {
-      'audio': false,
+      'audio': true,
       'video': {
         'mandatory': {
           'maxWidth': '640',
@@ -209,10 +208,10 @@ class _HomeState extends State<Home> {
                     SettingsTile.switchTile(
                       title: Text('প্যানিক ট্রিগার'),
                       leading: Icon(Icons.health_and_safety),
-                      initialValue: isPanicSwitched,
+                      initialValue: Get.find<HomeController>().isPanicSwitced,
                       onToggle: (value) {
                         setState(() {
-                          isPanicSwitched = value;
+                          Get.find<HomeController>().setPanicTrigger(value);
                           panicTrigger(value);
                         });
                       },
@@ -220,10 +219,10 @@ class _HomeState extends State<Home> {
                     SettingsTile.switchTile(
                       title: const Text('অবসেরভেশন ট্রিগার'),
                       leading: const Icon(Icons.video_call),
-                      initialValue: isObservationSwitched,
+                      initialValue: Get.find<HomeController>().isObservationSwitched,
                       onToggle: (value) {
                         setState(() {
-                          isObservationSwitched = value;
+                          Get.find<HomeController>().setObservationTrigger(value);
                           onservationTrigger(value);
                         });
                       },
