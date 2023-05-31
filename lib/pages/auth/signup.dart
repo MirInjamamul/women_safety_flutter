@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
@@ -15,6 +16,7 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final username_controller = TextEditingController();
   final password_controller = TextEditingController();
+  final confirm_password_controller = TextEditingController();
   final email_controller = TextEditingController();
   final mobile_controller = TextEditingController();
 
@@ -23,6 +25,7 @@ class _SignupState extends State<Signup> {
     // TODO: implement dispose
     username_controller.dispose();
     password_controller.dispose();
+    confirm_password_controller.dispose();
     email_controller.dispose();
     mobile_controller.dispose();
 
@@ -262,6 +265,7 @@ class _SignupState extends State<Signup> {
         obscureText: true,
         cursorColor: primaryColor,
         style: black15SemiBoldTextStyle,
+        controller: confirm_password_controller,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
@@ -369,24 +373,37 @@ class _SignupState extends State<Signup> {
     return InkWell(
       //TODO push to BottomBar
       onTap: (){
-        _checkControl();
+        bool fail = _checkControl();
 
-        authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
-          if(status.isSuccess!){
-            debugPrint("Success");
+        if(!fail){
+          authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
+            if(status.isSuccess!){
+              debugPrint("Success");
 
-            saveData();
-            currentIndex = 0;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const BottomBar()),
-            );
+              saveData();
+              currentIndex = 0;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BottomBar()),
+              );
 
-          }else{
-            debugPrint("Failed");
-          }
-        });
+            }else{
+              debugPrint("Failed");
+            }
+          });
+        }else{
+          Fluttertoast.showToast(
+              msg: "Password is not Matched",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+        }
+
 
       },
 
@@ -419,7 +436,11 @@ class _SignupState extends State<Signup> {
 
     }
 
-  void _checkControl() {
+  bool _checkControl() {
   //  TODO need to check control of input fields
+    if(password_controller.text == confirm_password_controller.text){
+      return false;
+    }else
+      return true;
   }
 }
