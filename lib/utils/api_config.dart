@@ -9,7 +9,7 @@ class ApiConfig{
   static const String loginWithEmail = 'Login With Email';
   static const String loginWithPhone = 'LOGIN WITH PHONE';
 
-  static const String baseUrl = "http://185.100.234.129:8008/api";
+  static const String baseUrl = "http://185.100.232.17:8008/api";
 
   // ENDPOINTS
   static const String signUpUri = "/users";
