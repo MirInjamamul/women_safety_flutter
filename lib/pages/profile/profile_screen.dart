@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
@@ -5,6 +6,7 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:women_safety_flutter/utils/custom_toast.dart';
 import 'package:women_safety_flutter/utils/images.dart';
 
+import '../auth/signin.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -305,10 +307,15 @@ class Profile extends StatelessWidget {
                         widthSpace,
                         Expanded(
                           child: InkWell(
-                            // onTap: () => Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => Signin()),
-                            // ),
+                            onTap: () async{
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setBool('login', false);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Signin()),
+                              );
+                            } ,
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               alignment: Alignment.center,

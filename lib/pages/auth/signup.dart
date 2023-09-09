@@ -373,9 +373,9 @@ class _SignupState extends State<Signup> {
     return InkWell(
       //TODO push to BottomBar
       onTap: (){
-        bool fail = _checkControl();
+        bool checkValidation = _checkControl();
 
-        if(!fail){
+        if(checkValidation){
           authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
             if(status.isSuccess!){
               debugPrint("Success");
@@ -438,9 +438,12 @@ class _SignupState extends State<Signup> {
 
   bool _checkControl() {
   //  TODO need to check control of input fields
-    if(password_controller.text == confirm_password_controller.text){
+    if(password_controller.text != confirm_password_controller.text){
+      debugPrint("***** false");
       return false;
-    }else
+    }else {
+      debugPrint("***** true");
       return true;
+    }
   }
 }
