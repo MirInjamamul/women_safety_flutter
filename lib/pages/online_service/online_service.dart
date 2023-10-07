@@ -6,6 +6,7 @@ import 'package:women_safety_flutter/pages/ambulance/ambulance_screen.dart';
 import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/emergencyService/emergency_service.dart';
 import 'package:women_safety_flutter/pages/fire_service/fire_service_screen.dart';
+import 'package:women_safety_flutter/pages/hospital/hospital_screen.dart';
 import 'package:women_safety_flutter/pages/thana/thana_screen.dart';
 import 'package:women_safety_flutter/utils/custom_toast.dart';
 import 'package:women_safety_flutter/utils/images.dart';
@@ -98,7 +99,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
                             Get.to(_screenList[index]);
                             break;
                           case 4:
-                            showCustomToast('Coming soon...');
+                            Get.to(_screenList[index]);
                             break;
                           case 5:
                             showCustomToast('Coming soon...');
@@ -148,10 +149,13 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
     const AmbulanceScreen(),
     /// for blood
     const ThanaScreen(),
-    /// for hospital
+    ///emergency
     const EmergencyServiceScreen(),
+    /// for hospital
+    const HospitalScreen(),
+    //
     /// for thana
-    const ComplainScreen(),
+   // const ComplainScreen(),
     /// for e-service
     Container(color: Colors.green,),
   ];

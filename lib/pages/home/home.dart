@@ -1,7 +1,9 @@
 import 'package:beacon_broadcast/beacon_broadcast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:women_safety_flutter/custom_appbar.dart';
+import 'package:women_safety_flutter/pages/profile/contact_list.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -226,7 +228,7 @@ class _HomeState extends State<Home> {
                         });
                       },
                     ),
-                    SettingsTile.switchTile(
+                    /*SettingsTile.switchTile(
                       title: Text('বিরতিহীন শাটডাউন মোড'),
                       leading: Icon(Icons.phone_android),
                       initialValue: isShutdownSwitched,
@@ -236,9 +238,9 @@ class _HomeState extends State<Home> {
                           fakeShutDownTrigger(value);
                         });
                       },
-                    ),
+                    ),*/
                   ]),
-              SettingsSection(
+            /*  SettingsSection(
                   title: Text('নতুন '),
                   tiles: [
                     SettingsTile.switchTile(
@@ -251,7 +253,7 @@ class _HomeState extends State<Home> {
                         });
                       },
                     ),
-                  ]),
+                  ]),*/
               SettingsSection(
                   title: Text('কন্টাক্ট'),
                   tiles: [
@@ -259,7 +261,8 @@ class _HomeState extends State<Home> {
                       title: Text('কল করুন '),
                       leading: Icon(Icons.phone),
                       onPressed: (BuildContext context) {
-                        insert_numbers();
+                        //insert_numbers();
+                        Navigator.push(context, CupertinoPageRoute(builder: (_) => const ContactsScreen()));
                       },
                     ),
                   ]),
