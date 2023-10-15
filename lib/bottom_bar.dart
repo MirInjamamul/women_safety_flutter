@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:women_safety_flutter/controller/signalR_controller.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/online_service/online_service.dart';
@@ -23,6 +25,13 @@ class _BottomBarState extends State<BottomBar> {
     setState(() {
       currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Get.find<SignalRController>().loginSignal();
+    super.initState();
   }
 
   @override

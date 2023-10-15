@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:logger/logger.dart';
+import 'package:women_safety_flutter/api_client.dart';
 import 'package:women_safety_flutter/data/message_model.dart';
 import 'package:women_safety_flutter/data/repo/signalR_repo.dart';
 import 'package:women_safety_flutter/data/response_model.dart';
 import 'package:women_safety_flutter/services/database_helper.dart';
 import 'package:women_safety_flutter/services/signalR_service.dart';
+import 'package:women_safety_flutter/utils/api_config.dart';
 
 class SignalRController extends GetxController implements GetxService{
   final SignalRepo signalRepo;
@@ -26,7 +28,6 @@ class SignalRController extends GetxController implements GetxService{
   }
 
   Future<void> setNick(String nick) async{
-
     hubConnection = signalRService.hubConnection;
     signalRepo.setNick(hubConnection, nick);
     _logger.i("CloudSignal Nick Set $nick");
@@ -55,8 +56,7 @@ class SignalRController extends GetxController implements GetxService{
       isMe: isMe,
       messageType: 'text',
       withUserId: receiverId,
-      toUserId: '1',
-     // toUserId: Get.find<AuthController>().getUserId().toString(),
+      toUserId: ApiConfig.userId,
       mediaUrl: '',
       unreadMessageCount: 1,
       isRequest: false,
@@ -122,8 +122,7 @@ class SignalRController extends GetxController implements GetxService{
       _isLoading = false;
       update();
     }
-    _messageList = await DatabaseHelper.instance.getMessagesByUserId(userId, '1', _currentPage, 15, reload);
-   // _messageList = await DatabaseHelper.instance.getMessagesByUserId(userId, Get.find<AuthController>().getUserId().toString(), _currentPage, 15, reload);
+    _messageList = await DatabaseHelper.instance.getMessagesByUserId(userId, ApiConfig.userId.toString(), _currentPage, 15, reload);
     _currentPage++;
     _isLoading = false;
     update();
@@ -152,8 +151,7 @@ class SignalRController extends GetxController implements GetxService{
         name: data['senderUserName'],
         messageType: 'text',
         withUserId: data['senderId'],
-        toUserId: '1',
-       // toUserId: Get.find<AuthController>().getUserId().toString(),
+        toUserId: ApiConfig.userId,
         mediaUrl: '',
         createdAt: DateTime.now().toString(),
         updatedAt: DateTime.now().toString(),
@@ -186,8 +184,7 @@ class SignalRController extends GetxController implements GetxService{
         name: data['senderUserName'],
         messageType: 'text',
         withUserId: data['senderId'],
-        toUserId: '1',
-        //toUserId: Get.find<AuthController>().getUserId().toString(),
+        toUserId: ApiConfig.userId,
         mediaUrl: '',
         createdAt: DateTime.now().toString(),
         updatedAt: DateTime.now().toString(),

@@ -1,5 +1,7 @@
 class Images{
 
+   static String user = 'assets/icons/user.png';
+   static String meUser = 'assets/icons/user (1).png';
 
    static String fireService = 'assets/firetruck.png';
    static String ambulance = 'assets/ambulance.png';
@@ -13,4 +15,5 @@ class Images{
    static String call = 'assets/phone-call.png';
    static String help = 'assets/help.png';
    static String profile = 'assets/users/user6.png';
+
 }

@@ -38,8 +38,7 @@ class SignalRService{
 
     _hubConnection.on("ConnectionId", (arguments){
       if(arguments!.isNotEmpty){
-        Get.find<SignalRController>().setNick('1');
-       // Get.find<SignalRController>().setNick(Get.find<AuthController>().getUserId().toString());
+        Get.find<SignalRController>().setNick(ApiConfig.userId.toString());
       }
     });
 
@@ -62,7 +61,6 @@ class SignalRService{
     ///
     _hubConnection.on("ReceiveLiveInvitation", (arguments){
       _logger.d("signalR ReceiveInvitation : $arguments");
-
       Get.find<SignalRController>().showInvitationDialogue(arguments);
     });
 

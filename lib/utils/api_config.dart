@@ -27,6 +27,8 @@ class ApiConfig{
 
   static const String appName = 'Women safety';
   static const String token = 'token';
+  static const String userId = '1001';
+  static const String userName = 'client';
 
   // static List<LanguageModel> languages = [
   //   LanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
