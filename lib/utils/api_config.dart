@@ -2,18 +2,18 @@
 class ApiConfig{
 
   // /// for Development
-  static const String mediaBaseUrl =  'http://185.100.232.17:8189';
-  static const String baseUrl =  'http://185.100.232.17:8189/api';
-  static const String signalRBaseUrl = "http://185.100.232.17:8080/api/Rosters";
-
-
+  static const String mediaBaseUrl =  '';
+  static const String baseUrl =  '';
+  /// Develop
+  static const String signalRBaseUrl = "http://185.100.232.17:9080/api/Rosters"; // DEVELOPMENT
+  static const String signalRUrl = "http://185.100.232.17:9080"; // DEVELOPMENT
 
 
   /// SQFLite Database
   static const String messageTableName = "messages";
   static const String requestTableName = "requests";
+
   ///SignalR
-  static const String signalRUrl = "http://185.100.232.17:8080";
   static const String signalRChatHub = "/chathub";
   static const String getOnlineRoster = signalRBaseUrl+'/online/';
   static const String getSuggestionRoster = signalRBaseUrl+'/suggestion/';
@@ -26,8 +26,6 @@ class ApiConfig{
 
 
   static const String appName = 'Women safety';
-
-
   static const String token = 'token';
 
   // static List<LanguageModel> languages = [
