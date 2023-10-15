@@ -39,9 +39,6 @@ class _HomeState extends State<Home> {
   late double height;
   late double width;
 
-  //Bluetooth
-  BeaconBroadcast beaconBroadcast = BeaconBroadcast();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -309,14 +306,6 @@ class _HomeState extends State<Home> {
   void panicTrigger(bool panicSwitch) async{
     if(panicSwitch){
       print("Panic Switch Triggered");
-
-      beaconBroadcast
-          .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
-          .setMajorId(1)
-          .setMinorId(100)
-          .setIdentifier("Safety")
-          .setExtraData([1])
-          .start();
 
       try {
         final int panic_value =  await platform.invokeMethod('startPanicService');
