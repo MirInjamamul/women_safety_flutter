@@ -147,6 +147,10 @@ class _HospitalScreenState extends State<HospitalScreen> {
 
   final List<ThanaModel> _thanaList =[
     ThanaModel(id: 0,image: Images.police, title: 'বিনএসবি', dept: 'জেনারেল হাসপাতাল',address: 'পাহাড়তলী, চট্টগ্রাম', phone: "+88031-659019",icon: 'assets/whatsapp.png', url: 'https://www.bnsb.org'),
+    ThanaModel(id: 1,image: Images.police, title: 'সিএসসিআর', dept: 'জেনারেল হাসপাতাল',address: 'প্রবোর্টক সার্কেল, চট্টগ্রাম', phone: "+880312550625",icon: 'assets/whatsapp.png', url: ''),
+    ThanaModel(id: 2,image: Images.police, title: 'সেন্টার পয়েন্ট হাসপাতাল প্রাইভেট লিমিটেড', dept: 'জেনারেল হাসপাতাল',address: '১০০, মমিন রোড, চট্টগ্রাম', phone: "+88 031 639025-7",icon: 'assets/whatsapp.png', url: 'https://www.centerpointhospital.in'),
+    ThanaModel(id: 3,image: Images.police, title: 'চট্টগ্রাম মা-শিশু জেনারেল হাসপাতাল', dept: 'শিশু স্বাস্থ্য ও মাদার কেয়ার হাসপাতাল',address: 'আগ্রাবাদ, চট্টগ্রাম', phone: "+880-31-2520063",icon: 'assets/whatsapp.png', url: 'http://www.maa-shishu-ctg.org'),
+    ThanaModel(id: 4,image: Images.police, title: 'চট্টগ্রাম আন্তর্জাতিক মেডিকেল কলেজ ও হাসপাতাল', dept: 'জেনারেল হাসপাতাল',address: '২০৬/১, হাজী চাঁদ মিয়া রোড, শমসের পাড়া চাঁদগাও, চট্টগ্রাম', phone: "+88 031-672384",icon: 'assets/whatsapp.png', url: 'https://www.cimch.edu.bd/'),
    ];
 
   Future<void> _makePhoneCall(String phoneNumber) async {
