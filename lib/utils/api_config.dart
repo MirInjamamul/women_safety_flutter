@@ -31,6 +31,13 @@ class ApiConfig{
   static const String adminId = '1002';
   static const String userName = 'client';
 
+  // ENDPOINTS
+  static const String signUpUri = "/users";
+  static const String signInUri = "/users/";
+
+//  Complain
+  static const String createComplainUri = "/complain";
+
   // static List<LanguageModel> languages = [
   //   LanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
   //   LanguageModel(languageName: 'German', countryCode: 'DE', languageCode: 'de'),
@@ -39,6 +46,13 @@ class ApiConfig{
 
   /// Bannerd Ad
   final adUnitId = 'ca-app-pub-3940256099942544/6300978111'; // Test Ad
-  final nativePostAdUnitID = 'ca-app-pub-3940256099942544/2247696110';  //Test Ad
+  final nativePostAdUnitID = 'ca-app-pub-3940256099942544/2247696110';
+
+  static String verificationCode = "verificationCode";
+
+  static String phoneNumber = "phoneNumber";
+
+  static String email = "email";
+
 
 }
