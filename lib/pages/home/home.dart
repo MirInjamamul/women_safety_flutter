@@ -1,4 +1,3 @@
-import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -8,9 +7,6 @@ import 'package:women_safety_flutter/custom_appbar.dart';
 import 'package:women_safety_flutter/pages/profile/contact_list.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 import 'package:settings_ui/settings_ui.dart';
-
-
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

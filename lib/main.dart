@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:women_safety_flutter/services/local_services.dart';
 import 'di_init.dart' as di;
 import 'pages/screens.dart';
 
@@ -41,12 +40,8 @@ class MyApp extends StatelessWidget with WidgetsBindingObserver{
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     switch(state){
       case AppLifecycleState.resumed:
-        LocalService().getXmppConnection();
-        debugPrint('Application Resumed');
         break;
       case AppLifecycleState.detached:
-        LocalService().logoutXMPP();
-        debugPrint('Application Detached');
         break;
       case AppLifecycleState.inactive:
         // TODO: Handle this case.
