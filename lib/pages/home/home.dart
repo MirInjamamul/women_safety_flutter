@@ -315,8 +315,6 @@ class _HomeState extends State<Home> {
     }else{
       print("Panic Switch Off");
 
-      beaconBroadcast.stop();
-
       try {
         final int panic_value =  await platform.invokeMethod('stopPanicService');
       } on PlatformException catch (e) {
