@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/controllers/home_controller.dart';
 import 'package:women_safety_flutter/custom_appbar.dart';
 import 'package:women_safety_flutter/pages/profile/contact_list.dart';
@@ -30,7 +31,6 @@ class _HomeState extends State<Home> {
   bool isShutdownSwitched = false;
   bool isAirplaneSwitched = false;
 
-  String username = "username";
 
   late double height;
   late double width;
@@ -38,11 +38,10 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // TODO: implement initState
-    fetchData();
-
 
     // initRenderers();
     // _getUserMedia();
+
 
     super.initState();
   }
@@ -130,7 +129,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                username,
+                Get.find<AuthController>().getName(),
                 style: black16BoldTextStyle,
               ),
               Text(
@@ -252,14 +251,15 @@ class _HomeState extends State<Home> {
                   title: Text('কন্টাক্ট'),
                   tiles: [
                     SettingsTile(
-                      title: Text('কল করুন '),
+                      title: Text('সেভ কন্টাক্ট'),
                       leading: Icon(Icons.phone),
                       onPressed: (BuildContext context) {
-                        //insert_numbers();
+                       // Navigator.push(context, MaterialPageRoute(builder: (context) => NotifyContact()));
                         Navigator.push(context, CupertinoPageRoute(builder: (_) => const ContactsScreen()));
                       },
                     ),
                   ]),
+
             ],
           ),
         ),
@@ -291,13 +291,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void fetchData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String data = prefs.getString('username') ?? "Not Valid";
-    setState(() {
-      username = data;
-    });
-  }
 
   void panicTrigger(bool panicSwitch) async{
     if(panicSwitch){
@@ -450,13 +443,6 @@ class _HomeState extends State<Home> {
 
   }
 
-  void insert_numbers() {
-    print("Insert Number Field Selected");
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NotifyContact()),
-    );
-  }
 
   _accept() {
     if (_session != null) {

@@ -1,8 +1,7 @@
 
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../helper/remote/api_client.dart';
+import 'package:women_safety_flutter/api_client.dart';
 import '../utils/api_config.dart';
 
 class AuthRepo{
@@ -32,6 +31,10 @@ class AuthRepo{
     return await sharedPreferences.setString(ApiConfig.token, token);
   }
 
+  bool isLoggedIn() {
+    return sharedPreferences.containsKey(ApiConfig.token);
+  }
+
   Future<bool> saveVerificationCode(int code) async{
     return await sharedPreferences.setInt(ApiConfig.verificationCode, code);
   }
@@ -54,5 +57,19 @@ class AuthRepo{
 
   String getEmail() {
     return sharedPreferences.getString(ApiConfig.email) ?? '';
+  }
+
+  Future<bool> setName(String name) async{
+    return await sharedPreferences.setString(ApiConfig.name, name);
+  }
+
+  String getName() {
+    return sharedPreferences.getString(ApiConfig.name) ?? '';
+  }
+
+  Future<bool> clearSharedData() async {
+    sharedPreferences.remove(ApiConfig.token);
+    sharedPreferences.remove(ApiConfig.name);
+    return true;
   }
 }

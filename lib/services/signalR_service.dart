@@ -2,7 +2,7 @@ import 'package:logger/logger.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:get/get.dart';
-import 'package:women_safety_flutter/controller/signalR_controller.dart';
+import 'package:women_safety_flutter/controllers/signalR_controller.dart';
 import 'package:women_safety_flutter/utils/api_config.dart';
 
 

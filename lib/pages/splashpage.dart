@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/pages/online_service/online_service.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
@@ -17,15 +20,18 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
+    _route();
     super.initState();
-    Timer(
-      const Duration(seconds: 3),
-          () => Navigator.push(
-        context,
-        //MaterialPageRoute(builder: (context) => const OnlineServiceScreen()),
-        MaterialPageRoute(builder: (context) => const Onboarding()),
-      ),
-    );
+
+  }
+  void _route() {
+    Timer(const Duration(seconds: 3), () async {
+      if (Get.find<AuthController>().isLoggedIn()) {
+        Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (BuildContext context) => const BottomBar()), (route) => false);
+      } else {
+        Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (BuildContext context) => Signin()), (route) => false);
+      }
+    });
   }
 
   @override

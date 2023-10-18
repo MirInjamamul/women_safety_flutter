@@ -14,11 +14,9 @@ class AuthController extends GetxController{
     ResponseModel responseModel;
     if(response.statusCode == 200){
       Map map = response.body;
-      // String token = map["token"];
-
-      // authRepo.saveUserToken(token);
       authRepo.saveEmail(email);
-
+      authRepo.setName(userName);
+      authRepo.saveUserToken(map["token"]);
       responseModel = ResponseModel(true, 'Login Success');
     }else if(response.statusCode == 422 || response.statusCode == 302){
       responseModel = ResponseModel(false, 'The email has already been taken.');
@@ -34,13 +32,9 @@ class AuthController extends GetxController{
     ResponseModel responseModel;
     if(response.statusCode == 200){
       Map map = response.body;
-      // String token = map["token"];
-
-      // authRepo.saveUserToken(token);
-
       if(map['password'] == pwd){
         authRepo.saveEmail(email);
-
+        authRepo.saveUserToken(map["token"]);
         responseModel = ResponseModel(true, 'Login Success');
       }else{
         responseModel = ResponseModel(false, 'Wrong Password');
@@ -68,5 +62,16 @@ class AuthController extends GetxController{
     return authRepo.getEmail();
   }
 
+  bool isLoggedIn(){
+    return authRepo.isLoggedIn();
+  }
+  String getName(){
+    return authRepo.getName();
+  }
+
+
+  Future<bool> clearSharedData() async {
+    return await authRepo.clearSharedData();
+  }
 
 }

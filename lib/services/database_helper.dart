@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:women_safety_flutter/data/contact_model.dart';
 import 'package:women_safety_flutter/data/message_model.dart';
 import 'package:women_safety_flutter/utils/api_config.dart';
 
@@ -16,7 +17,7 @@ class DatabaseHelper{
       return _database!;
     }
 
-    _database = await _initDB('gypsy.db');
+    _database = await _initDB('women_safety.db');
     return _database!;
   }
 
@@ -61,7 +62,67 @@ class DatabaseHelper{
       createdAt text,
       updatedAt text not null)
     ''');
+
+    await db.execute('CREATE TABLE contacts(id INTEGER PRIMARY KEY, name TEXT, phone TEXT, colors TEXT)');
   }
+
+
+
+  Future<void> insertContact(ContactModel contact) async {
+    final db = await instance.database;
+    await db.insert(
+      'contacts',
+      contact.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // A method that retrieves all the Contacts from the Contacts table.
+  Future<List<ContactModel>> getContactList() async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query('contacts');
+    return List.generate(maps.length, (index) => ContactModel.fromMap(maps[index]));
+  }
+
+  Future<ContactModel> getContactDetails(int id) async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> maps =
+    await db.query('contacts', where: 'id = ?', whereArgs: [id]);
+    return ContactModel.fromMap(maps[0]);
+  }
+
+  // A method that updates a Contact data from the Contacts table.
+  Future<void> updateContact(ContactModel contact) async {
+    // Get a reference to the database.
+    final db = await instance.database;
+
+    // Update the given Contact
+    await db.update(
+      'contacts',
+      contact.toMap(),
+      // Ensure that the Contact has a matching id.
+      where: 'id = ?',
+      // Pass the Contact's id as a whereArg to prevent SQL injection.
+      whereArgs: [contact.id],
+    );
+  }
+
+  // A method that deletes a Contact data from the Contacts table.
+  Future<void> deleteContact(int id) async {
+    // Get a reference to the database.
+    final db = await instance.database;
+
+    // Remove the Contact from the database.
+    await db.delete(
+      'contacts',
+      // Use a `where` clause to delete a specific Contact.
+      where: 'id = ?',
+      // Pass the Contact's id as a whereArg to prevent SQL injection.
+      whereArgs: [id],
+    );
+  }
+
+
 
   Future<void> insert({required MessageModel messageModel})async{
     try{

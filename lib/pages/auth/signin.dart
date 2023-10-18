@@ -145,6 +145,7 @@ class _SigninState extends State<Signin> {
       child: TextField(
         cursorColor: primaryColor,
         style: black15SemiBoldTextStyle,
+        keyboardType: TextInputType.emailAddress,
         controller: username_controller,
         decoration: InputDecoration(
           isDense: true,
@@ -343,14 +344,9 @@ class _SigninState extends State<Signin> {
               textColor: Colors.white,
               fontSize: 16.0
           );
-
           currentIndex = 0;
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BottomBar()),
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BottomBar()),
           );
-
         }else{
           Fluttertoast.showToast(
               msg: status.message!,

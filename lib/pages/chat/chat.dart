@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:women_safety_flutter/controller/signalR_controller.dart';
+import 'package:women_safety_flutter/controllers/signalR_controller.dart';
 import 'package:women_safety_flutter/utils/api_config.dart';
 import 'package:women_safety_flutter/utils/images.dart';
 

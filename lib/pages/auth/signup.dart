@@ -379,15 +379,8 @@ class _SignupState extends State<Signup> {
           authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
             if(status.isSuccess!){
               debugPrint("Success");
-
-              saveData();
               currentIndex = 0;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BottomBar()),
-              );
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
             }else{
               debugPrint("Failed");
             }
@@ -425,16 +418,6 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
-
-  saveData() async{
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      prefs.setBool('login', true);
-      prefs.setString('username', username_controller.text);
-      prefs.setString('password', password_controller.text);
-
-    }
 
   bool _checkControl() {
   //  TODO need to check control of input fields

@@ -3,7 +3,7 @@ class ApiConfig{
 
   // /// for Development
   static const String mediaBaseUrl =  '';
-  static const String baseUrl =  '';
+  static const String baseUrl =  'http://185.100.232.17:8008/api';
   /// Develop
   static const String signalRBaseUrl = "http://185.100.232.17:9080/api/Rosters"; // DEVELOPMENT
   static const String signalRUrl = "http://185.100.232.17:9080"; // DEVELOPMENT
@@ -53,6 +53,7 @@ class ApiConfig{
   static String phoneNumber = "phoneNumber";
 
   static String email = "email";
+  static String name = "userName";
 
 
 }

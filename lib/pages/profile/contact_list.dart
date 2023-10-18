@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:women_safety_flutter/controllers/home_controller.dart';
+import 'package:women_safety_flutter/data/contact_model.dart';
+import 'package:women_safety_flutter/pages/screens.dart';
 
 
 class ContactsScreen extends StatefulWidget {
@@ -15,10 +18,12 @@ class ContactsScreen extends StatefulWidget {
 class _ContactsScreenState extends State<ContactsScreen> {
   List<AppContact>? _contacts;
   bool _permissionDenied = false;
-
+  String _number = '';
+  bool  _isLoading = true;
 
   @override
   void initState() {
+    Get.find<HomeController>().getContactList(true);
     super.initState();
     _fetchContacts();
   }
@@ -28,18 +33,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     if (!await FlutterContacts.requestPermission(readonly: true)) {
       setState(() => _permissionDenied = true);
     } else {
-
-
-      // final contacts = await FlutterContacts.getContacts();
-      // setState(() => _contacts = contacts);
-
       getAllContacts();
-      // if(_contacts!.isNotEmpty){
-      //   for(var i = 0; i<_contacts!.length; i++){
-      //     final fullNumber = await FlutterContacts.getContact(_contacts![i].id);
-      //     _numList.add(fullNumber!.phones.first.number);
-      //   }
-      // }
     }
   }
 
@@ -60,8 +54,19 @@ class _ContactsScreenState extends State<ContactsScreen> {
       return AppContact(info: contact, color: baseColor);
     }).toList();
     setState(() => _contacts = contacts);
+    // fetchNumber().then((value) => setState(() {
+    //   _isLoading = false;
+    // }));
+
   }
 
+  Future fetchNumber()async{
+    for(var item in _contacts!){
+      final fullContact = await FlutterContacts.getContact(item.info.id);
+      _number = fullContact!.phones.first.number;
+      print('kfadngkfgfdgfdg ${_number}/${fullContact}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,58 +86,100 @@ class _ContactsScreenState extends State<ContactsScreen> {
   Widget _body() {
     if (_permissionDenied) return const Center(child: Text('Permission denied'));
     if (_contacts == null) return const Center(child: CircularProgressIndicator());
-    return Column( crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 50,
-          padding: const EdgeInsets.all(12),
-          child: Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
-            const SizedBox(width: 10),
-            InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                onTap: () => Get.back(),
-                child:  const Icon(Icons.arrow_back_ios, color: Colors.black, size: 18,)),
-            const Expanded(child: SizedBox()),
-            const Text('Contact', style: TextStyle(color: Colors.black, fontSize: 16)),
-            const Expanded(child: SizedBox()),
-            const SizedBox()
-          ],),
-        ),
-        Expanded(
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overScroll) {
-              overScroll.disallowIndicator();
-              return true;
-            },
-            child: ListView.builder(
-                itemCount: _contacts!.length,
-                itemBuilder: (context, i) {
-                  return ListTile(
-                    leading: ContactAvatar( Key('$i'),_contacts![i], 36),
-                    title: Text(_contacts![i].info.displayName),
-                    trailing: InkWell(
-                      onTap: () async{
-                        final fullContact = await FlutterContacts.getContact(_contacts![i].info.id);
-                        _textMe(fullContact!.phones.first.number, '');
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.blueAccent
-                        ),
-                        child: Text('Invite', style: TextStyle(color: Colors.white, fontSize: 16),),
-                      ),
-                    ),
-                  );
-                }
-            ),
+
+    return GetBuilder<HomeController>(
+      builder: (home) => Column( crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 50,
+            padding: const EdgeInsets.all(12),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
+              const SizedBox(width: 10),
+              InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  onTap: () => Get.back(),
+                  child:  const Icon(Icons.arrow_back_ios, color: Colors.black, size: 18,)),
+              const Expanded(child: SizedBox()),
+              const Text('Contact', style: TextStyle(color: Colors.black, fontSize: 16)),
+              const Expanded(child: SizedBox()),
+              const SizedBox()
+            ],),
           ),
-        ),
-      ],
+
+          if(home.contactList.isNotEmpty)...[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('সেভ করা কন্টাক্ট', style: grey15RegularTextStyle.copyWith(color: Colors.black),),
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: home.contactList.length,
+                itemBuilder: (_, index){
+                  String colorVal = '(0xFF${home.contactList[index].colors})';
+                  String valueString = colorVal.split('(0x')[1].split(')')[0]; // kind of hacky..
+                  int value = int.parse(valueString, radix: 16);
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Color(value),
+                      child: Text(home.contactList[index].name.isNotEmpty ? (home.contactList[index].name[0]).toUpperCase() : '',
+                          style: const TextStyle(color: Colors.white)),
+                    ),
+                    title: Text(home.contactList[index].name),
+                   // subtitle: Text(home.contactList[index].phone),
+                  );
+                }),
+            if(home.contactList.length > 2)...[
+              const Expanded(child: SizedBox())
+            ]
+          ],
+
+
+          if(home.contactList.length < 3)...[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('নতুন কন্টাক্ট', style: grey15RegularTextStyle.copyWith(color: Colors.black),),
+            ),
+            Expanded(
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overScroll) {
+                  overScroll.disallowIndicator();
+                  return true;
+                },
+                child: ListView.builder(
+                    itemCount: _contacts!.length,
+                    itemBuilder: (context, i) {
+
+                      return ListTile(
+                        leading: ContactAvatar(Key('$i'),_contacts![i], 36),
+                        title: Text(_contacts![i].info.displayName),
+                       // subtitle: Text(_number),
+                        trailing: InkWell(
+                          onTap: () async{
+                            final fullContact = await FlutterContacts.getContact(_contacts![i].info.id);
+                            Get.find<HomeController>().contactInsert(ContactModel(name: _contacts![i].info.displayName, phone: fullContact!.phones.first.number, colors: _contacts![i].color.value.toRadixString(16).toString()));
+                            Get.back();
+                            // _textMe(fullContact!.phones.first.number, '');
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.blueAccent
+                            ),
+                            child: const Text('Save', style: TextStyle(color: Colors.white, fontSize: 16),),
+                          ),
+                        ),
+                      );
+                    }
+                ),
+              ),
+            ),
+          ]
+        ],
+      ),
     );
   }
 
@@ -167,7 +214,8 @@ class ContactAvatar extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-            shape: BoxShape.circle, gradient: getColorGradient(contact.color)),
+            shape: BoxShape.circle,
+            gradient: getColorGradient(contact.color)),
         child: (contact.info.thumbnail != null && contact.info.thumbnail!.isNotEmpty)
             ? CircleAvatar(
           backgroundImage: MemoryImage(contact.info.thumbnail!),
@@ -189,4 +237,12 @@ LinearGradient getColorGradient(Color color) {
     color1,
     color2,
   ], begin: Alignment.bottomLeft, end: Alignment.topRight);
+}
+
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    return int.parse(hexColor, radix: 16);
+  }
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

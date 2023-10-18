@@ -3,7 +3,11 @@
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/home_controller.dart';
 import 'package:women_safety_flutter/data/contact.dart';
+import 'package:women_safety_flutter/data/contact_model.dart';
+import 'package:women_safety_flutter/services/database_helper.dart';
 import '../screens.dart';
 
 class NotifyContact extends StatefulWidget {
@@ -18,7 +22,7 @@ class _NotifyContactState extends State<NotifyContact> {
 
   final name_controller = TextEditingController();
   final phone_controller = TextEditingController();
-  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  // final DatabaseHelper _databaseHelper = DatabaseHelper();
 
   @override
   void dispose() {
@@ -195,9 +199,7 @@ class _NotifyContactState extends State<NotifyContact> {
 
   void insert_phone_number() async{
     // row to insert
-    await _databaseHelper.insertContact(
-      Contact(name: name_controller.text, phone: phone_controller.text),
-    );
+   // Get.find<HomeController>().contactInsert(ContactModel(name: name_controller.text, phone: phone_controller.text));
 
     Fluttertoast.showToast(
         msg: "Phone Number Added",

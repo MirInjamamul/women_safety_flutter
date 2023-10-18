@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
@@ -307,15 +309,11 @@ class Profile extends StatelessWidget {
                         widthSpace,
                         Expanded(
                           child: InkWell(
-                            onTap: () async{
-                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setBool('login', false);
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Signin()),
-                              );
-                            } ,
+                           onTap: (){
+                             Get.find<AuthController>().clearSharedData().then((value) {
+                               Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (BuildContext context) => Signin()), (route) => false);
+                             });
+                             },
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               alignment: Alignment.center,

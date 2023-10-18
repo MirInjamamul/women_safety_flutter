@@ -1,7 +1,7 @@
 
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:women_safety_flutter/helper/remote/api_client.dart';
+import 'package:women_safety_flutter/api_client.dart';
 import 'package:women_safety_flutter/utils/api_config.dart';
 
 class ComplainRepo{
