@@ -16,8 +16,8 @@ class ComplainScreen extends StatefulWidget {
 }
 
 class _ComplainScreenState extends State<ComplainScreen> {
-     List<String> list = <String>['থানা নির্বাচন করুন','চকবাজার থানা', 'কোতয়ালী থানা', 'ইপিজেড থানা', 'পাহাড়তলী থানা', 'বায়েজিদ বোস্তামী থানা'];
-     List<String> list1 = <String>['অভিযোগের ধরণ','খুন', 'দুর্নীতি', 'ছিনতাই', 'ধর্ষণ'];
+     List<String> list = <String>['select_police_station'.tr,'চকবাজার থানা', 'কোতয়ালী থানা', 'ইপিজেড থানা', 'পাহাড়তলী থানা', 'বায়েজিদ বোস্তামী থানা'];
+     List<String> list1 = <String>['type_of_complaint'.tr,'খুন', 'দুর্নীতি', 'ছিনতাই', 'ধর্ষণ'];
      String thanaValue = '';
      String complainValue = '';
 
@@ -99,7 +99,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                 ),
               ]
           ),
-          child: const Text('অভিযোগ বাক্স',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          child: Text('complaint_box'.tr,  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       ),
@@ -109,7 +109,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
             child: Column( crossAxisAlignment: CrossAxisAlignment.center, mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 40,),
-                const Text('আপনি স্বাধীনভাবে আপনার মতামত প্রকাশ করুন', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),
+                Text('you_are_free_to_express_your_opinion'.tr, style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),
                 const SizedBox(height: 40,),
 
                 Container(
@@ -323,10 +323,10 @@ class _ComplainScreenState extends State<ComplainScreen> {
                               ]
                           ),
                           child: Row(
-                            children: const [
+                            children:  [
                               Icon(Icons.camera_alt),
                               SizedBox(width: 4,),
-                              Text('ক্যামেরা')
+                              Text('camera'.tr)
                             ],
                           )
                       ),
@@ -358,10 +358,10 @@ class _ComplainScreenState extends State<ComplainScreen> {
                               ]
                           ),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(Icons.videocam_off_sharp),
                               SizedBox(width: 4,),
-                              Text('ভিডিও')
+                              Text('video'.tr)
                             ],
                           )
                       ),
@@ -393,10 +393,10 @@ class _ComplainScreenState extends State<ComplainScreen> {
                               ]
                           ),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(Icons.video_file_outlined),
                               SizedBox(width: 4,),
-                              Text('ডকুমেন্ট')
+                              Text('document'.tr)
                             ],
                           )
                       ),
@@ -432,8 +432,8 @@ class _ComplainScreenState extends State<ComplainScreen> {
                   child: TextField(
                     controller: _commentController,
                     maxLines: 5,
-                    decoration: const InputDecoration(
-                        hintText: 'মন্তব্য লিখুন',
+                    decoration:  InputDecoration(
+                        hintText: 'comments'.tr,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.fromLTRB(5, 5, 5,0)
                     ),
@@ -485,7 +485,7 @@ class _ComplainScreenState extends State<ComplainScreen> {
                           ),
                         ]
                     ),
-                    child: const Text('সাবমিট', style: TextStyle(color: Colors.white),),
+                    child: Text('submit'.tr, style: TextStyle(color: Colors.white),),
                   ),
                 ),
                 const SizedBox(height: 40,),

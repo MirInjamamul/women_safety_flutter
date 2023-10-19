@@ -151,7 +151,14 @@ class _HospitalScreenState extends State<HospitalScreen> {
     ThanaModel(id: 2,image: Images.police, title: 'সেন্টার পয়েন্ট হাসপাতাল প্রাইভেট লিমিটেড', dept: 'জেনারেল হাসপাতাল',address: '১০০, মমিন রোড, চট্টগ্রাম', phone: "+88 031 639025-7",icon: 'assets/whatsapp.png', url: 'https://www.centerpointhospital.in'),
     ThanaModel(id: 3,image: Images.police, title: 'চট্টগ্রাম মা-শিশু জেনারেল হাসপাতাল', dept: 'শিশু স্বাস্থ্য ও মাদার কেয়ার হাসপাতাল',address: 'আগ্রাবাদ, চট্টগ্রাম', phone: "+880-31-2520063",icon: 'assets/whatsapp.png', url: 'http://www.maa-shishu-ctg.org'),
     ThanaModel(id: 4,image: Images.police, title: 'চট্টগ্রাম আন্তর্জাতিক মেডিকেল কলেজ ও হাসপাতাল', dept: 'জেনারেল হাসপাতাল',address: '২০৬/১, হাজী চাঁদ মিয়া রোড, শমসের পাড়া চাঁদগাও, চট্টগ্রাম', phone: "+88 031-672384",icon: 'assets/whatsapp.png', url: 'https://www.cimch.edu.bd/'),
-   ];
+
+    ThanaModel(id: 5,image: Images.police, title: 'শেভরন', dept: 'জেনারেল হাসপাতাল',address: 'মক্কি মসজিদের সামনে, চট্টগ্রাম', phone: "880-31-657863",icon: 'assets/whatsapp.png', url: 'https://www.chevronlab.com'),
+    ThanaModel(id: 6,image: Images.police, title: 'চট্টগ্রাম স্বাস্থ্য সেবা হাসপাতাল প্রাইভেট লিমিটেড', dept: 'জেনারেল হাসপাতাল',address: '৪,ও আর নিজাম রোড, চট্টগ্রাম', phone: "+88 031 652728",icon: 'assets/whatsapp.png', url: ''),
+    ThanaModel(id: 7,image: Images.police, title: 'চট্টগ্রাম মেট্রোপলিটন হাসপাতাল প্রা লিমিটেড', dept: 'জেনারেল হাসপাতাল',address: ' ৪৮৭ / বি, ওআর নিজাম রোড, জিইসি মোর, চট্টগ্রাম', phone: "+88 031 654732",icon: 'assets/whatsapp.png', url: ''),
+    ThanaModel(id: 8,image: Images.police, title: 'চট্টগ্রাম পলি ক্লিনিক প্রা লিমিটেড', dept: 'জেনারেল হাসপাতাল',address: '৩৩, পাঁচলাইশ আর / এ, চট্টগ্রাম', phone: "+88 031 650911",icon: 'assets/whatsapp.png', url: ''),
+    ThanaModel(id: 9,image: Images.police, title: 'একুশে হাসপাতাল', dept: 'জেনারেল হাসপাতাল',address: 'মিরজারপুল, চট্টগ্রাম', phone: "+880-31-657629",icon: 'assets/whatsapp.png', url: ''),
+
+  ];
 
   Future<void> _makePhoneCall(String phoneNumber) async {
     final Uri launchUri = Uri(

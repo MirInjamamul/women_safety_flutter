@@ -7,7 +7,7 @@ import 'package:women_safety_flutter/utils/api_config.dart';
 
 import '../repositories/home_repo.dart';
 
-class HomeController extends GetxController{
+class HomeController extends GetxController implements GetxService{
   final HomeRepo homeRepo;
 
   HomeController({required this.homeRepo});

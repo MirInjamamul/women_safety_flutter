@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
@@ -53,7 +54,7 @@ class _SigninState extends State<Signin> {
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 title: Text(
-                  'Sign In',
+                  'sign_in'.tr,
                   style: white20BoldTextStyle,
                 ),
               ),
@@ -150,7 +151,7 @@ class _SigninState extends State<Signin> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'User Name',
+          hintText: 'user_name'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -183,7 +184,7 @@ class _SigninState extends State<Signin> {
             decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
-              hintText: 'Password',
+              hintText: 'password'.tr,
               hintStyle: grey15RegularTextStyle,
               border: const UnderlineInputBorder(borderSide: BorderSide.none),
             ),
@@ -191,7 +192,7 @@ class _SigninState extends State<Signin> {
         ),
         heightSpace,
         Text(
-          'Forget password?',
+          'forget_password'.tr,
           style: grey12RegularTextStyle,
         ),
       ],
@@ -222,7 +223,7 @@ class _SigninState extends State<Signin> {
                       width: 15,
                     ),
                     Text(
-                      'SignIn with facebook',
+                      'signIn_with_facebook'.tr,
                       style: white12BoldTextStyle,
                     ),
                   ],
@@ -252,7 +253,7 @@ class _SigninState extends State<Signin> {
                     ),
                     widthSpace,
                     Text(
-                      'SignIn with Google',
+                      'signIn_with_google'.tr,
                       style: white12BoldTextStyle,
                     ),
                   ],
@@ -268,9 +269,10 @@ class _SigninState extends State<Signin> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Don\'t have account? ',
+              'do_not_have_account'.tr,
               style: grey14SemiBoldTextStyle,
             ),
+            const SizedBox(width: 5),
             InkWell(
               onTap: (){
                 Navigator.push(
@@ -279,7 +281,7 @@ class _SigninState extends State<Signin> {
                 );
               } ,
               child: Text(
-                'Sign Up',
+                'sign_up'.tr,
                 style: primaryColor14SemiBoldTextStyle,
               ),
             ),
@@ -303,7 +305,7 @@ class _SigninState extends State<Signin> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: Text(
-          'Sign In'.toUpperCase(),
+          'SIGN_IN'.tr,
           style: white16BoldTextStyle,
         ),
       ),
@@ -313,9 +315,57 @@ class _SigninState extends State<Signin> {
   void checkUserLogin(AuthController authController) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if(prefs.getString('username') != null && prefs.getString('username')! .contains(username_controller.text) && prefs.getString('password')!.contains(password_controller.text)){
+    if(username_controller.text.isNotEmpty && password_controller.text.isNotEmpty){
+      if(prefs.getString('username') != null && prefs.getString('username')!.contains(username_controller.text) && prefs.getString('password')!.contains(password_controller.text)){
+        Fluttertoast.showToast(
+            msg: "Login Successful",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+
+        currentIndex = 0;
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BottomBar()),
+        );
+
+      }else{
+
+        authController.signIn(username_controller.text, password_controller.text).then((status) {
+          if(status.isSuccess!){
+            Fluttertoast.showToast(
+                msg: "Login Successful",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+            currentIndex = 0;
+            Navigator.push(context, MaterialPageRoute(builder: (context) => BottomBar()),
+            );
+          }else{
+            Fluttertoast.showToast(
+                msg: status.message!,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+          }
+        });
+      }
+    }else{
       Fluttertoast.showToast(
-          msg: "Login Successful",
+          msg: "write_something_in_the_box".tr,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -323,42 +373,6 @@ class _SigninState extends State<Signin> {
           textColor: Colors.white,
           fontSize: 16.0
       );
-
-      currentIndex = 0;
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => BottomBar()),
-      );
-
-    }else{
-
-      authController.signIn(username_controller.text, password_controller.text).then((status) {
-        if(status.isSuccess!){
-          Fluttertoast.showToast(
-              msg: "Login Successful",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0
-          );
-          currentIndex = 0;
-          Navigator.push(context, MaterialPageRoute(builder: (context) => BottomBar()),
-          );
-        }else{
-          Fluttertoast.showToast(
-              msg: status.message!,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0
-          );
-        }
-      });
     }
   }
 }

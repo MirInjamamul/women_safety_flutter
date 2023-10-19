@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
 import 'package:women_safety_flutter/controllers/auth_controller.dart';
+import 'package:women_safety_flutter/controllers/localization_controller.dart';
 import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:women_safety_flutter/utils/custom_toast.dart';
 import 'package:women_safety_flutter/utils/images.dart';
 
 import '../auth/signin.dart';
@@ -45,7 +44,7 @@ class Profile extends StatelessWidget {
                 ),
               ]
           ),
-          child: const Text('প্রোফাইল',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          child: Text('profile'.tr,  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       ),
@@ -87,7 +86,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nila Khan',
+                  Get.find<AuthController>().getName(),
                   style: black16BoldTextStyle,
                 ),
                 Text(
@@ -113,7 +112,7 @@ class Profile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
-                      'আপগ্রেড প্ল্যান',
+                      'upgrade_plan'.tr,
                       style: white14SemiBoldTextStyle,
                     ),
                   ),
@@ -168,7 +167,7 @@ class Profile extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const Chat()),
           ),
-          title: 'চ্যাট',
+          title: 'chat'.tr,
           image: 'assets/icons/chat.png',
           color: blackColor,
         ),
@@ -177,7 +176,7 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const Notifications()),
           // ),
-          title: 'নোটিফিকেশন',
+          title: 'notification'.tr,
           image: 'assets/icons/notification.png',
           color: blackColor,
         ),
@@ -186,7 +185,7 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const SubscriptionPaln()),
           // ),
-          title: 'সাবস্ক্রিপশন প্ল্যান',
+          title: 'subscription_plan'.tr,
           image: 'assets/icons/subscribe.png',
           color: blackColor,
         ),
@@ -195,26 +194,68 @@ class Profile extends StatelessWidget {
           //   context,
           //   MaterialPageRoute(builder: (context) => const Settings()),
           // ),
-          title: 'সেটিং',
+          title: 'settings'.tr,
           image: 'assets/icons/setting.png',
           color: blackColor,
         ),
         detail(
           ontap: () {},
-          title: 'টার্ম & কন্ডিশন',
+          title: 'terms_condition'.tr,
           image: 'assets/icons/condition.png',
           color: blackColor,
         ),
-        detail(
-          ontap: () => showCustomToast('শীঘ্রই আসছে..'),
-          title: 'ভাষা',
-          image: 'assets/icons/sort.png',
-          color: blackColor,
+
+        GetBuilder<LocalizationController>(
+          builder: (local) => InkWell(
+            onTap: () => local.toggleLanguage(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: fixPadding * 1.2,
+                horizontal: fixPadding * 2.0,
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/sort.png',
+                    color: blackColor,
+                    height: 20,
+                    width: 20,
+                    fit: BoxFit.cover,
+                  ),
+                  widthSpace,
+                  widthSpace,
+                  widthSpace,
+                  widthSpace,
+                  Text(
+                    'language'.tr,
+                    style: TextStyle(
+                      color: blackColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    local.locale.languageCode == 'en'
+                        ? 'English'.tr
+                        :'Bangla'.tr,
+                    style: black13RegularTextStyle,
+                  ),
+                 const SizedBox(width: 6),
+                 const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
+
         heightSpace,
         detail(
           ontap: () => logoutDialog(context),
-          title: 'লগ আউট',
+          title: 'logOut'.tr,
           image: 'assets/icons/logout.png',
           color: primaryColor,
         ),
@@ -277,7 +318,7 @@ class Profile extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Sure you want to logout?',
+                      'sure_you_want_to_logout'.tr,
                     ),
                     heightSpace,
                     heightSpace,
@@ -298,7 +339,7 @@ class Profile extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Text(
-                                'Cancel',
+                                'cancel'.tr,
                               ),
                             ),
                           ),
@@ -323,7 +364,7 @@ class Profile extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Text(
-                                'Logout',
+                                'logOut'.tr,
                                 style: white16BoldTextStyle,
                               ),
                             ),

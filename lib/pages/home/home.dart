@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFE7ECEF),
-      appBar: const CustomAppBar(title: 'সেটিংস',),
+      appBar:  CustomAppBar(title: 'settings'.tr,),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(vertical: fixPadding * 2.0),
@@ -156,7 +156,7 @@ class _HomeState extends State<Home> {
                       ),
                       color: primaryColor,
                       child: Text(
-                        'বেসিক',
+                        'basic'.tr,
                         style: white13RegularTextStyle,
                       ),
                     ),
@@ -173,7 +173,7 @@ class _HomeState extends State<Home> {
                           vertical: 3,
                         ),
                         child: Text(
-                          'আপগ্রেড প্ল্যান',
+                          'upgrade_plan'.tr,
                           style: primaryColor13RegularTextStyle,
                         ),
                       ),
@@ -191,16 +191,16 @@ class _HomeState extends State<Home> {
   featureSettings() {
     return Column(
       children: [
-        title('সিকিউরিটি ফীচার'),
+        title('security_features'.tr),
         SizedBox(
           height: height * .55,
           child: SettingsList(
             sections: [
               SettingsSection(
-                  title: Text('ইমার্জেন্সি'),
+                  title: Text('emergency'.tr),
                   tiles: [
                     SettingsTile.switchTile(
-                      title: Text('প্যানিক ট্রিগার'),
+                      title: Text('panic_trigger'.tr),
                       leading: Icon(Icons.health_and_safety),
                       initialValue: Get.find<HomeController>().isPanicSwitced,
                       onToggle: (value) {
@@ -211,7 +211,7 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     SettingsTile.switchTile(
-                      title: const Text('অবসেরভেশন ট্রিগার'),
+                      title:  Text('observation_trigger'.tr),
                       leading: const Icon(Icons.video_call),
                       initialValue: Get.find<HomeController>().isObservationSwitched,
                       onToggle: (value) {
@@ -248,10 +248,10 @@ class _HomeState extends State<Home> {
                     ),
                   ]),*/
               SettingsSection(
-                  title: Text('কন্টাক্ট'),
+                  title: Text('contact'.tr),
                   tiles: [
                     SettingsTile(
-                      title: Text('সেভ কন্টাক্ট'),
+                      title: Text('save_contact'.tr),
                       leading: Icon(Icons.phone),
                       onPressed: (BuildContext context) {
                        // Navigator.push(context, MaterialPageRoute(builder: (context) => NotifyContact()));
@@ -283,7 +283,7 @@ class _HomeState extends State<Home> {
             style: black16BoldTextStyle,
           ),
           Text(
-            'সবগুলো',
+            'all_of_them'.tr,
             style: primaryColor12BlackTextStyle,
           ),
         ],

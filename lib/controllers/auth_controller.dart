@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -5,7 +6,7 @@ import '../data/response/response_model.dart';
 import '../repositories/auth_repo.dart';
 
 
-class AuthController extends GetxController{
+class AuthController extends GetxController implements GetxService{
   final AuthRepo authRepo;
   AuthController({required this.authRepo});
 

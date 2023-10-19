@@ -22,7 +22,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
 
 
   final List<String> _iconList = [Images.fireService,Images.ambulance, Images.police, Images.emergencyService, Images.hospital, Images.eSeva];
-  final List<String> _titleList = ["ফায়ার সার্ভিস","অ্যাম্বুলেন্স", "থানা পুলিশ","জরুরী সেবা", "হাসপাতাল", "ই-পরিষেবা"];
+  final List<String> _titleList = ["fire_service".tr,"ambulance".tr, "police_station".tr,"emergency_services".tr, "hospital".tr, "e_services".tr];
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
                 ),
               ]
           ),
-          child: const Text('অনলাইন পরিষেবা',  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          child:  Text('online_service'.tr,  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       ),
@@ -126,11 +126,11 @@ class _OnlineServiceScreenState extends State<OnlineServiceScreen> {
                             ),
                           ]
                         ),
-                        child: Column( mainAxisSize: MainAxisSize.min,
+                        child: Column( mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(_iconList[index], height: 30,),
                             const SizedBox(height: 8,),
-                            Text(_titleList[index], style: const TextStyle(color: Colors.black, fontSize: 12), overflow: TextOverflow.ellipsis, maxLines: 2,),
+                            Text(_titleList[index], style: const TextStyle(color: Colors.black, fontSize: 12), overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center,),
                           ],
                         )
                       ),

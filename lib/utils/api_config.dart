@@ -1,4 +1,6 @@
 
+import 'package:women_safety_flutter/data/language_model.dart';
+
 class ApiConfig{
 
   // /// for Development
@@ -30,6 +32,8 @@ class ApiConfig{
   static const String userId = '1001';
   static const String adminId = '1002';
   static const String userName = 'client';
+  static const String countryCode = 'country_code';
+  static const String languageCode = 'language_code';
 
   // ENDPOINTS
   static const String signUpUri = "/users";
@@ -37,11 +41,6 @@ class ApiConfig{
 
 //  Complain
   static const String createComplainUri = "/complain";
-
-  // static List<LanguageModel> languages = [
-  //   LanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
-  //   LanguageModel(languageName: 'German', countryCode: 'DE', languageCode: 'de'),
-  // ];
 
 
   /// Bannerd Ad
@@ -55,5 +54,9 @@ class ApiConfig{
   static String email = "email";
   static String name = "userName";
 
+  static List<LanguageModel> languages = [
+    LanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
+    LanguageModel(languageName: 'Bangla', countryCode: 'BD', languageCode: 'bn'),
+  ];
 
 }

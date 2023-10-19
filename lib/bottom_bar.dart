@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:women_safety_flutter/controllers/signalR_controller.dart';
-import 'package:women_safety_flutter/pages/chat/chat.dart';
 import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/online_service/online_service.dart';
 import 'package:women_safety_flutter/pages/profile/profile_screen.dart';
@@ -62,10 +60,10 @@ class _BottomBarState extends State<BottomBar> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              getBottomBarItemTile(0, 'assets/icons/setting.png', 'সেটিং'),
-              getBottomBarItemTile(1, 'assets/24-7.png', 'সেবা'),
-              getBottomBarItemTile(2, 'assets/box.png', 'অভিযোগ'),
-              getBottomBarItemTile(3, 'assets/icons/profile.png', 'প্রোফাইল'),
+              getBottomBarItemTile(0, 'assets/icons/setting.png', 'settings'),
+              getBottomBarItemTile(1, 'assets/24-7.png', 'service'),
+              getBottomBarItemTile(2, 'assets/box.png', 'complain'),
+              getBottomBarItemTile(3, 'assets/icons/profile.png', 'profile'),
              // getBottomBarItemTile(3, 'assets/icons/chat.png', 'Chat'),
             ],
           ),
@@ -106,7 +104,7 @@ class _BottomBarState extends State<BottomBar> {
             color: (currentIndex == index) ? primaryColor : greyColor,
           ),
           Text(
-            title,
+            title.tr,
             style: TextStyle(
               color: (currentIndex == index) ? primaryColor : greyColor,
               fontSize: 13,

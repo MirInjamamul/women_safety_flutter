@@ -1,4 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
@@ -56,7 +57,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               title: Text(
-                'Sign Up',
+                'sign_up'.tr,
                 style: white20BoldTextStyle,
               ),
             ),
@@ -149,7 +150,7 @@ class _SignupState extends State<Signup> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'Full Name',
+          hintText: 'full_name'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -179,7 +180,7 @@ class _SignupState extends State<Signup> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'Email Address',
+          hintText: 'email_address'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -209,7 +210,7 @@ class _SignupState extends State<Signup> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'Mobile Number',
+          hintText: 'mobile_number'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -239,7 +240,7 @@ class _SignupState extends State<Signup> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'Password',
+          hintText: 'password'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -269,7 +270,7 @@ class _SignupState extends State<Signup> {
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          hintText: 'Confirm Password',
+          hintText: 'confirm_password'.tr,
           hintStyle: grey15RegularTextStyle,
           border: const UnderlineInputBorder(borderSide: BorderSide.none),
         ),
@@ -301,7 +302,7 @@ class _SignupState extends State<Signup> {
                       width: 15,
                     ),
                     Text(
-                      'Signup with facebook',
+                      'signIn_with_facebook'.tr,
                       style: white12BoldTextStyle,
                     ),
                   ],
@@ -331,7 +332,7 @@ class _SignupState extends State<Signup> {
                     ),
                     widthSpace,
                     Text(
-                      'Signup with Google',
+                      'signIn_with_google'.tr,
                       style: white12BoldTextStyle,
                     ),
                   ],
@@ -347,16 +348,17 @@ class _SignupState extends State<Signup> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Already have account? ',
+              'already_have_account'.tr,
               style: grey14SemiBoldTextStyle,
             ),
+            const SizedBox(width: 5),
             InkWell(
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Signin()),
               ),
               child: Text(
-                'Sign In',
+                'sign_in'.tr,
                 style: primaryColor14SemiBoldTextStyle,
               ),
             ),
@@ -412,7 +414,7 @@ class _SignupState extends State<Signup> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: Text(
-          'Sign Up'.toUpperCase(),
+          'SIGN_UP'.tr,
           style: white16BoldTextStyle,
         ),
       ),

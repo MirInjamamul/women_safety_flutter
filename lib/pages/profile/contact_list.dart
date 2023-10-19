@@ -103,7 +103,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   onTap: () => Get.back(),
                   child:  const Icon(Icons.arrow_back_ios, color: Colors.black, size: 18,)),
               const Expanded(child: SizedBox()),
-              const Text('Contact', style: TextStyle(color: Colors.black, fontSize: 16)),
+               Text('contact'.tr, style: TextStyle(color: Colors.black, fontSize: 16)),
               const Expanded(child: SizedBox()),
               const SizedBox()
             ],),
@@ -112,7 +112,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
           if(home.contactList.isNotEmpty)...[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('সেভ করা কন্টাক্ট', style: grey15RegularTextStyle.copyWith(color: Colors.black),),
+              child: Text('save_contact'.tr, style: grey15RegularTextStyle.copyWith(color: Colors.black),),
             ),
             ListView.builder(
                 shrinkWrap: true,
@@ -140,7 +140,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
           if(home.contactList.length < 3)...[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('নতুন কন্টাক্ট', style: grey15RegularTextStyle.copyWith(color: Colors.black),),
+              child: Text('new_contact'.tr, style: grey15RegularTextStyle.copyWith(color: Colors.black),),
             ),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
@@ -169,7 +169,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.blueAccent
                             ),
-                            child: const Text('Save', style: TextStyle(color: Colors.white, fontSize: 16),),
+                            child:  Text("save".tr, style: TextStyle(color: Colors.white, fontSize: 16),),
                           ),
                         ),
                       );

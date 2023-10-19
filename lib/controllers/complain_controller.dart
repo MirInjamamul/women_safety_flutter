@@ -1,11 +1,12 @@
 
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../data/response/response_model.dart';
 import '../repositories/complain_repo.dart';
 
-class ComplainController extends GetxController{
+class ComplainController extends GetxController implements GetxService{
   final ComplainRepo complainRepo;
   ComplainController({required this.complainRepo});
 

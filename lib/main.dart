@@ -1,38 +1,49 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/localization_controller.dart';
+import 'package:women_safety_flutter/route_helper.dart';
+import 'package:women_safety_flutter/services/local_string.dart';
 import 'di_init.dart' as di;
 import 'pages/screens.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
-  ).then((_) async{
-    await di.init();
-    runApp(const MyApp());
-  });
-
+  Map<String, Map<String, String>> localString = await di.init();
+  runApp(MyApp(localString: localString));
 }
 
 class MyApp extends StatelessWidget with WidgetsBindingObserver{
-  const MyApp({Key? key}) : super(key: key);
+  static final navigatorKey = GlobalKey<NavigatorState>();
+  final Map<String, Map<String, String>> localString;
+  const MyApp({Key? key, required this.localString}) : super(key: key);
+
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Women Safety',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        primaryColor: primaryColor,
-        fontFamily: 'NunitosSans',
-        appBarTheme: const AppBarTheme(
-          color: Colors.transparent,
-          elevation: 0,
-          iconTheme: IconThemeData(color: blackColor),
+    return GetBuilder<LocalizationController>(
+      builder: (local) => GetMaterialApp(
+        locale: local.locale,
+        translations: LocaleString(localString: localString),
+        fallbackLocale: const Locale('en', 'US'),
+        title: 'Women Safety',
+        initialRoute: MyRouteHelper.splashScreen,
+        defaultTransition: Transition.topLevel,
+        transitionDuration: const Duration(milliseconds: 500),
+        getPages: MyRouteHelper.routes,
+        navigatorKey: Get.key,
+        theme: ThemeData(
+          primarySwatch: Colors.brown,
+          primaryColor: primaryColor,
+          fontFamily: 'NunitosSans',
+          appBarTheme: const AppBarTheme(
+            color: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: blackColor),
+          ),
         ),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const Splash(),
     );
   }
 
