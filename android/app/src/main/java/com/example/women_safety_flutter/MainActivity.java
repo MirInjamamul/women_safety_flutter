@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.example.women_safety_flutter.service.PanicService;
 
+import java.nio.charset.StandardCharsets;
+
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "safety/panic";
@@ -45,7 +47,7 @@ public class MainActivity extends FlutterActivity {
 
     private static final AdvertiseData advertiseData = new AdvertiseData.Builder()
             .setIncludeDeviceName(true)  // Include device name
-            .addServiceUuid(ParcelUuid.fromString("00002a00-0000-1000-8000-00805f9b34fb"))  // Add a custom service UUID
+            .addServiceData(ParcelUuid.fromString("00002a00-0000-1000-8000-00805f9b34fb"), "safety".getBytes(StandardCharsets.UTF_8)) // Add a custom service UUID
             .build();
 
     @Override
