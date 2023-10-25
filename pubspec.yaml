@@ -29,6 +29,7 @@ dependencies:
   images_picker: ^1.2.11
   flutter_contacts: ^1.1.7+1
   connectivity_plus: ^2.3.9
+  uuid: ^4.1.0
 
   #for real time messeging
   signalr_netcore: ^1.2.1
