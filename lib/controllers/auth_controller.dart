@@ -19,6 +19,8 @@ class AuthController extends GetxController implements GetxService{
       authRepo.setName(userName);
       authRepo.saveUserToken(map["token"]);
       responseModel = ResponseModel(true, 'Login Success');
+
+      authRepo.createChatUser(map);
     }else if(response.statusCode == 422 || response.statusCode == 302){
       responseModel = ResponseModel(false, 'The email has already been taken.');
     }else{

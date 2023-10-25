@@ -1,6 +1,9 @@
 
+import 'dart:math';
+
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 import 'package:women_safety_flutter/api_client.dart';
 import '../utils/api_config.dart';
 
@@ -71,5 +74,24 @@ class AuthRepo{
     sharedPreferences.remove(ApiConfig.token);
     sharedPreferences.remove(ApiConfig.name);
     return true;
+  }
+
+  Future<void> createChatUser(Map map) async{
+    int strId = map["user"]["id"];
+    int id = 1000 + strId;
+    final uuid = Uuid();
+    final randomUuid = uuid.v4();
+
+    final random = Random();
+    final timeStamp = DateTime.now().millisecondsSinceEpoch;
+    final randomPart = random.nextInt(999999999);
+
+    await apiClient.postData(ApiConfig.signalRBaseUrl, {
+      "id": '$timeStamp$randomPart'.padRight(24,'0').toString(),
+      "userId": id.toString(),
+      "nickName": map["user"]["email"].toString(),
+      "photo": "a",
+      "isActive": false,
+    });
   }
 }
