@@ -79,14 +79,12 @@ class AuthRepo{
   Future<void> createChatUser(Map map) async{
     int strId = map["user"]["id"];
     int id = 1000 + strId;
-    final uuid = Uuid();
+    const uuid = Uuid();
     final randomUuid = uuid.v4();
-
     final random = Random();
     final timeStamp = DateTime.now().millisecondsSinceEpoch;
     final randomPart = random.nextInt(999999999);
-
-    await apiClient.postData(ApiConfig.signalRBaseUrl, {
+    await apiClient.postWithOutBaseUrl(ApiConfig.signalRBaseUrl, {
       "id": '$timeStamp$randomPart'.padRight(24,'0').toString(),
       "userId": id.toString(),
       "nickName": map["user"]["email"].toString(),

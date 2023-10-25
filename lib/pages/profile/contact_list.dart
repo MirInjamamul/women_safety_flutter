@@ -103,7 +103,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   onTap: () => Get.back(),
                   child:  const Icon(Icons.arrow_back_ios, color: Colors.black, size: 18,)),
               const Expanded(child: SizedBox()),
-               Text('contact'.tr, style: TextStyle(color: Colors.black, fontSize: 16)),
+               Text('contact'.tr, style: const TextStyle(color: Colors.black, fontSize: 16)),
               const Expanded(child: SizedBox()),
               const SizedBox()
             ],),

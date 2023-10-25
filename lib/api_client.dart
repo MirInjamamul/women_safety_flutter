@@ -130,6 +130,26 @@ class ApiClient extends GetxService {
     return Response(statusCode: response.statusCode, body: response.body);
   }
 
+  Future<Response> postWithOutBaseUrl(String uri, dynamic body, {Map<String, String>? headers, int? timeout}) async {
+
+    if(await isNetworkStable()){
+      try {
+        if(foundation.kDebugMode) {
+          debugPrint('====> API Call: $uri\nHeader: $_mainHeaders');
+          debugPrint('====> API Body: $body');
+        }
+        http.Response _response = await http.post(Uri.parse(uri), body: jsonEncode(body), headers: headers ?? _mainHeaders,).timeout(Duration(seconds: timeout ?? timeoutInSeconds));
+        return handleResponse(_response, uri);
+      } catch (e) {
+        return handleResponse(http.Response('', 405), '');
+        //return const Response(statusCode: 401, statusText: noResponse);
+      }
+    }else{
+      return const Response(statusCode: 1, statusText: noInternetMessage);
+    }
+  }
+
+
 
   Future<Response> getBlockUserCheck(String userId, String blockId)async{
     var requestBody  = jsonEncode({

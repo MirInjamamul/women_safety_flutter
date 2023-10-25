@@ -4,7 +4,6 @@ import 'package:women_safety_flutter/data/language_model.dart';
 class ApiConfig{
 
   // /// for Development
-  static const String mediaBaseUrl =  '';
   static const String baseUrl =  'http://185.100.232.17:8008/api';
   /// Develop
   static const String signalRBaseUrl = "http://185.100.232.17:9080/api/Rosters"; // DEVELOPMENT
