@@ -28,7 +28,6 @@ class ApiConfig{
 
   static const String appName = 'Women safety';
   static const String token = 'token';
-  static const String userId = '1001';
   static const String adminId = '1002';
   static const String userName = 'client';
   static const String countryCode = 'country_code';
@@ -53,6 +52,7 @@ class ApiConfig{
 
   static String email = "email";
   static String name = "userName";
+  static String chatUserId = "chatUserId";
 
   static List<LanguageModel> languages = [
     LanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),

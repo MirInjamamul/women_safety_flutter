@@ -2,6 +2,7 @@ import 'package:logger/logger.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:get/get.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/controllers/signalR_controller.dart';
 import 'package:women_safety_flutter/utils/api_config.dart';
 
@@ -38,7 +39,7 @@ class SignalRService{
 
     _hubConnection.on("ConnectionId", (arguments){
       if(arguments!.isNotEmpty){
-        Get.find<SignalRController>().setNick(ApiConfig.userId.toString());
+        Get.find<SignalRController>().setNick(Get.find<AuthController>().getChatUserId().toString());
       }
     });
 

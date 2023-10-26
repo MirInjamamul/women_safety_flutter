@@ -91,5 +91,15 @@ class AuthRepo{
       "photo": "a",
       "isActive": false,
     });
+
+    setChatUserId(id);
+  }
+
+  Future<void> setChatUserId(int id) async{
+    await sharedPreferences.setInt(ApiConfig.chatUserId, id);
+  }
+
+  int getChatUserId() {
+    return sharedPreferences.getInt(ApiConfig.chatUserId) ?? 0;
   }
 }

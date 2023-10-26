@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:logger/logger.dart';
 import 'package:women_safety_flutter/api_client.dart';
+import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/data/message_model.dart';
 import 'package:women_safety_flutter/data/repo/signalR_repo.dart';
 import 'package:women_safety_flutter/data/response_model.dart';
@@ -56,7 +57,7 @@ class SignalRController extends GetxController implements GetxService{
       isMe: isMe,
       messageType: 'text',
       withUserId: receiverId,
-      toUserId: ApiConfig.userId,
+      toUserId: ApiConfig.adminId,
       mediaUrl: '',
       unreadMessageCount: 1,
       isRequest: false,
@@ -122,7 +123,7 @@ class SignalRController extends GetxController implements GetxService{
       _isLoading = false;
       update();
     }
-    _messageList = await DatabaseHelper.instance.getMessagesByUserId(userId, ApiConfig.userId.toString(), _currentPage, 15, reload);
+    _messageList = await DatabaseHelper.instance.getMessagesByUserId(userId, Get.find<AuthController>().getChatUserId().toString(), _currentPage, 15, reload);
     _currentPage++;
     _isLoading = false;
     update();
@@ -151,7 +152,7 @@ class SignalRController extends GetxController implements GetxService{
         name: data['senderUserName'],
         messageType: 'text',
         withUserId: data['senderId'],
-        toUserId: ApiConfig.userId,
+        toUserId: Get.find<AuthController>().getChatUserId().toString(),
         mediaUrl: '',
         createdAt: DateTime.now().toString(),
         updatedAt: DateTime.now().toString(),
@@ -184,7 +185,7 @@ class SignalRController extends GetxController implements GetxService{
         name: data['senderUserName'],
         messageType: 'text',
         withUserId: data['senderId'],
-        toUserId: ApiConfig.userId,
+        toUserId: Get.find<AuthController>().getChatUserId().toString(),
         mediaUrl: '',
         createdAt: DateTime.now().toString(),
         updatedAt: DateTime.now().toString(),

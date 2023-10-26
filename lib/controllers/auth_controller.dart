@@ -71,6 +71,10 @@ class AuthController extends GetxController implements GetxService{
     return authRepo.getName();
   }
 
+  int getChatUserId(){
+    return authRepo.getChatUserId();
+  }
+
 
   Future<bool> clearSharedData() async {
     return await authRepo.clearSharedData();
