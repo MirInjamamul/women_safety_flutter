@@ -58,7 +58,7 @@ class SignalRController extends GetxController implements GetxService{
       isMe: isMe,
       messageType: 'text',
       withUserId: receiverId,
-      toUserId: ApiConfig.adminId,
+      toUserId: Get.find<AuthController>().getChatUserId().toString(),
       mediaUrl: '',
       unreadMessageCount: 1,
       isRequest: false,
@@ -170,7 +170,7 @@ class SignalRController extends GetxController implements GetxService{
       );
       await DatabaseHelper.instance.insert(messageModel: messageModel);
       _messageList.add(messageModel);
-      // print('--------->>>>><<<${Get.currentRoute}/${ModalRoute.of(context)?.settings.name}');
+       print('--------->>>>><<<RECE ${_messageList}');
       if (!Get.currentRoute.contains('/InboxScreen')) {
         //createLocalNotification(messageModel.name!, messageModel.message!);
       }

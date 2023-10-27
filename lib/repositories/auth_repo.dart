@@ -23,8 +23,7 @@ class AuthRepo{
     });
   }
 
-  Future<Response> signIn(
-      {required String email}) async {
+  Future<Response> signIn({required String email}) async {
     return await apiClient.getData(ApiConfig.signInUri+email);
   }
 
@@ -79,8 +78,6 @@ class AuthRepo{
   Future<void> createChatUser(Map map) async{
     int strId = map["user"]["id"];
     int id = 1000 + strId;
-    const uuid = Uuid();
-    final randomUuid = uuid.v4();
     final random = Random();
     final timeStamp = DateTime.now().millisecondsSinceEpoch;
     final randomPart = random.nextInt(999999999);
