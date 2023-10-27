@@ -163,7 +163,6 @@ class _OnboardingState extends State<Onboarding> {
               bool loggedIn = await loggedAuthFetch();
 
               if(loggedIn){
-                currentIndex = 0;
                 Navigator.push(
                   context,
                   MaterialPageRoute(

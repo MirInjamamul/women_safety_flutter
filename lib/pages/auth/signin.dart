@@ -313,43 +313,10 @@ class _SigninState extends State<Signin> {
   }
 
   void checkUserLogin(AuthController authController) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
     if(username_controller.text.isNotEmpty && password_controller.text.isNotEmpty){
-      if(prefs.getString('username') != null && prefs.getString('username')!.contains(username_controller.text) && prefs.getString('password')!.contains(password_controller.text)){
-        Fluttertoast.showToast(
-            msg: "Login Successful",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.green,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-
-        currentIndex = 0;
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BottomBar()),
-        );
-
-      }else{
-
         authController.signIn(username_controller.text, password_controller.text).then((status) {
           if(status.isSuccess!){
-            Fluttertoast.showToast(
-                msg: "Login Successful",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.green,
-                textColor: Colors.white,
-                fontSize: 16.0
-            );
-            currentIndex = 0;
-            Navigator.push(context, MaterialPageRoute(builder: (context) => BottomBar()),
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
           }else{
             Fluttertoast.showToast(
                 msg: status.message!,
@@ -362,7 +329,6 @@ class _SigninState extends State<Signin> {
             );
           }
         });
-      }
     }else{
       Fluttertoast.showToast(
           msg: "write_something_in_the_box".tr,
