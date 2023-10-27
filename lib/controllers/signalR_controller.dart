@@ -184,6 +184,55 @@ class SignalRController extends GetxController implements GetxService{
     }
   }
 
+  void receivedRequestMessage(var arguments) async{
+    if(arguments.isNotEmpty){
+      Map<String, dynamic> data = arguments[0];
+      MessageModel messageModel = MessageModel(
+        messageId: data["messageId"],
+        name: data['senderUserName'],
+        messageType: 'text',
+        withUserId: data['senderId'],
+        toUserId: Get.find<AuthController>().getChatUserId().toString(),
+        mediaUrl: '',
+        createdAt: DateTime.now().toString(),
+        updatedAt: DateTime.now().toString(),
+        message: data['message'],
+        unreadMessageCount: 1,
+        isRequest: true,
+        isHide: false,
+        isDeleteAccount: false,
+        isActive: true,
+        isMe: false,
+        lastMessage: data['message'],
+        photo: "",
+        isSeen: false,
+      );
+
+      await DatabaseHelper.instance.insert(messageModel: messageModel);
+      _messageList.add(messageModel);
+
+      await DatabaseHelper.instance.insertRequestData(
+          requestModel: RequestModel(
+              withUserId: data['senderId'],
+              createdAt: DateTime.now().toString(),
+              updatedAt: DateTime.now().toString())
+      ).then((value) {
+        print('------- $value');
+        if(value){
+          _triggerNotification('Message Request', "You've got a new message request");
+        }
+      });
+
+
+      update();
+
+      if(messageModel.message!.contains("/location")){
+        getCurrentLocation(messageModel);
+
+      }
+    }
+  }
+
   _triggerNotification(String title, String description){
     //createLocalNotification(title, description);
   }
