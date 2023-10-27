@@ -349,7 +349,7 @@ class _HomeState extends State<Home> {
 
   _connect() async {
     String user = "safety";
-    _signaling ??= Signaling('bamboojs.com', user)..connect('Safety');
+    _signaling ??= Signaling('unitedsportshub.com', user)..connect('Safety');
     _signaling?.onSignalingStateChange = (SignalingState state) {
       switch (state) {
         case SignalingState.ConnectionClosed:
