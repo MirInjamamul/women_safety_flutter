@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:women_safety_flutter/controllers/signalR_controller.dart';
 import 'package:women_safety_flutter/pages/complain/complain_screen.dart';
 import 'package:women_safety_flutter/pages/online_service/online_service.dart';
@@ -14,10 +15,12 @@ class BottomBar extends StatefulWidget {
   _BottomBarState createState() => _BottomBarState();
 }
 
-int currentIndex = 0;
+
 
 class _BottomBarState extends State<BottomBar> {
   DateTime? currentBackPressTime;
+
+  int currentIndex = 0;
 
   changeIndex(index) {
     setState(() {
@@ -28,9 +31,54 @@ class _BottomBarState extends State<BottomBar> {
   @override
   void initState() {
     // TODO: implement initState
+    checkFirstSeen();
     Get.find<SignalRController>().loginSignal();
     super.initState();
   }
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? true);
+    if (_seen) {
+      if(Platform.isAndroid){
+        checkCameraPermission().then((value) {
+          if(value.isDenied){
+            checkPer().then((value) {
+              if(value == 'denied'){
+                debugPrint('--------->>>>denied');
+                prefs.setBool('seen', true);
+              }else if(value == 'permanentlyDenied'){
+                prefs.setBool('seen', true);
+              }else{
+                debugPrint('--------->>>>granted');
+                prefs.setBool('seen', true);
+              }
+            });
+            prefs.setBool('seen', true);
+          }else if(value.isGranted){
+          }
+        });
+      }
+    }
+  }
+
+  Future<String> checkPer() async{
+    Map<Permission, PermissionStatus> permissions = await [Permission.location].request();
+    if(permissions[Permission.location] == PermissionStatus.granted){
+      return 'granted';
+    }else if(permissions[Permission.location] == PermissionStatus.denied){
+      return 'denied';
+    }else if(permissions[Permission.location] == PermissionStatus.permanentlyDenied){
+      return 'permanentlyDenied';
+    }
+    return 'permanentlyDenied';
+  }
+
+  Future<PermissionStatus> checkCameraPermission() async {
+    final status = await Permission.location.status;
+    return status;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +91,7 @@ class _BottomBarState extends State<BottomBar> {
           }
           return false;
         },
-        child: (currentIndex == 0)
-            ? const Home()
-            : (currentIndex == 1)
+        child: (currentIndex == 0) ? const Home() : (currentIndex == 1)
             ? const OnlineServiceScreen()
             : (currentIndex == 2)
             ? const ComplainScreen()

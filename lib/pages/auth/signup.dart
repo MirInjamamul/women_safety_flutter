@@ -1,6 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
 
 import '../../controllers/auth_controller.dart';
@@ -381,7 +380,6 @@ class _SignupState extends State<Signup> {
           authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
             if(status.isSuccess!){
               debugPrint("Success");
-              currentIndex = 0;
               Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
             }else{
               debugPrint("Failed");

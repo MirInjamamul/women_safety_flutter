@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:women_safety_flutter/controllers/auth_controller.dart';
 import 'package:women_safety_flutter/controllers/home_controller.dart';
 import 'package:women_safety_flutter/custom_appbar.dart';
@@ -39,12 +42,9 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
 
-    // initRenderers();
-    // _getUserMedia();
-
-
     super.initState();
   }
+
 
   @override
   void dispose(){
@@ -79,6 +79,7 @@ class _HomeState extends State<Home> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery
@@ -104,6 +105,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 
   userProfile() {
     return Padding(

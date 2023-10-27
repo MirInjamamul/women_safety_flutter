@@ -1,16 +1,16 @@
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
+import 'package:women_safety_flutter/controllers/base_controller.dart';
 import '../data/response/response_model.dart';
 import '../repositories/auth_repo.dart';
 
 
-class AuthController extends GetxController implements GetxService{
+class AuthController extends GetxController with BaseController implements GetxService{
   final AuthRepo authRepo;
   AuthController({required this.authRepo});
 
   Future<ResponseModel> signUp(String email, String pwd, String userName, String mobile) async{
+    showLoading();
+    update();
     Response response = await authRepo.signUp(email: email, password: pwd, username: userName, mobile: mobile);
     ResponseModel responseModel;
     if(response.statusCode == 200){
@@ -25,11 +25,15 @@ class AuthController extends GetxController implements GetxService{
     }else{
       responseModel = ResponseModel(false, 'Internal Server Error');
     }
-
+    hideLoading();
+    update();
     return responseModel;
   }
 
+
   Future<ResponseModel> signIn(String email, String pwd) async{
+    showLoading();
+    update();
     Response response = await authRepo.signIn(email: email);
     ResponseModel responseModel;
     if(response.statusCode == 200){
@@ -51,6 +55,8 @@ class AuthController extends GetxController implements GetxService{
       responseModel = ResponseModel(false, 'Internal Server Error');
     }
 
+    hideLoading();
+    update();
     return responseModel;
   }
 
