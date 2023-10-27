@@ -28,15 +28,6 @@ class SignalRService{
       Get.find<SignalRController>().receivedMessage(arguments);
     });
 
-    _hubConnection.on("ReceiveRequestMessage", (arguments) {
-      _logger.d("signalR ReceiveRequestMessage : $arguments");
-      Get.find<SignalRController>().receivedRequestMessage(arguments);
-    });
-
-    _hubConnection.on("ReceiveUser", (arguments) {
-      _logger.d("Receive User: $arguments");
-    });
-
     _hubConnection.on("ConnectionId", (arguments){
       if(arguments!.isNotEmpty){
         Get.find<SignalRController>().setNick(Get.find<AuthController>().getChatUserId().toString());

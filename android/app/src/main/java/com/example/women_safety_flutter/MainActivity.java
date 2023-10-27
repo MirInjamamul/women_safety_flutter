@@ -124,6 +124,8 @@ public class MainActivity extends FlutterActivity {
         getActivity().stopService(serviceIntent);
     }
 
+
+
     // Advertise Callbacks
     private AdvertiseCallback advertiseCallback = new AdvertiseCallback() {
         @Override

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:signalr_netcore/hub_connection.dart';
@@ -174,50 +175,12 @@ class SignalRController extends GetxController implements GetxService{
         //createLocalNotification(messageModel.name!, messageModel.message!);
       }
       update();
-    }
-  }
-
-  void receivedRequestMessage(var arguments) async{
-    if(arguments.isNotEmpty){
-      Map<String, dynamic> data = arguments[0];
-      MessageModel messageModel = MessageModel(
-        messageId: data["messageId"],
-        name: data['senderUserName'],
-        messageType: 'text',
-        withUserId: data['senderId'],
-        toUserId: Get.find<AuthController>().getChatUserId().toString(),
-        mediaUrl: '',
-        createdAt: DateTime.now().toString(),
-        updatedAt: DateTime.now().toString(),
-        message: data['message'],
-        unreadMessageCount: 1,
-        isRequest: true,
-        isHide: false,
-        isDeleteAccount: false,
-        isActive: true,
-        isMe: false,
-        lastMessage: data['message'],
-        photo: "",
-        isSeen: false,
-      );
-
-      await DatabaseHelper.instance.insert(messageModel: messageModel);
-      _messageList.add(messageModel);
-
-      await DatabaseHelper.instance.insertRequestData(
-          requestModel: RequestModel(
-              withUserId: data['senderId'],
-              createdAt: DateTime.now().toString(),
-              updatedAt: DateTime.now().toString())
-      ).then((value) {
-        print('------- $value');
-        if(value){
-          _triggerNotification('Message Request', "You've got a new message request");
-        }
-      });
 
 
-      update();
+      if(messageModel.message!.contains("/location")){
+        getCurrentLocation(messageModel);
+
+      }
     }
   }
 
@@ -416,5 +379,25 @@ class SignalRController extends GetxController implements GetxService{
     }
     signalRService.dispose();
   }
+
+  Future<void> getCurrentLocation(MessageModel messageModel) async{
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      double latitude = position.latitude;
+      double longitude = position.longitude;
+
+      print('Latitude: $latitude, Longitude: $longitude');
+      String message = 'https://www.google.com/maps?q=$latitude,$longitude';
+
+      sendMessage(messageModel.withUserId!, messageModel.name!, message);
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+
 
 }
