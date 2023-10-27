@@ -37,6 +37,8 @@ class AuthController extends GetxController implements GetxService{
       if(map['password'] == pwd){
         authRepo.saveEmail(email);
         authRepo.saveUserToken(map["token"]);
+        setChatUserId(map['id'] + 1000);
+        authRepo.setName(map["name"]);
         responseModel = ResponseModel(true, 'Login Success');
       }else{
         responseModel = ResponseModel(false, 'Wrong Password');
@@ -70,7 +72,13 @@ class AuthController extends GetxController implements GetxService{
   String getName(){
     return authRepo.getName();
   }
+  Future<bool> setName(String name){
+    return authRepo.setName(name);
+  }
 
+  Future<void> setChatUserId(int id) {
+    return authRepo.setChatUserId(id);
+  }
   int getChatUserId(){
     return authRepo.getChatUserId();
   }
