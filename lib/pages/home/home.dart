@@ -346,7 +346,6 @@ class _HomeState extends State<Home> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
   }
 
-
   _connect() async {
     String user = "safety";
     _signaling ??= Signaling('unitedsportshub.com', user)..connect('Safety');
@@ -442,7 +441,6 @@ class _HomeState extends State<Home> {
     // _localRenderer.dispose();
 
   }
-
 
   _accept() {
     if (_session != null) {
