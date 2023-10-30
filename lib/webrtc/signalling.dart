@@ -330,7 +330,7 @@ class Signaling {
         _iceServers = {
           'iceServers': [
             {
-              'urls': 'turn:45.136.153.49:19302?transport=udp',
+              'urls': 'turn:185.100.232.17:19302?transport=udp',
               'username': _turnCredential['username'],
               'credential': _turnCredential['password']
             },
