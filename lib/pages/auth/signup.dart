@@ -4,6 +4,13 @@ import 'package:women_safety_flutter/pages/screens.dart';
 
 import '../../controllers/auth_controller.dart';
 
+
+enum ValidationError{
+  password,
+  empty,
+  none
+}
+
 // ignore: must_be_immutable
 class Signup extends StatefulWidget {
 
@@ -19,6 +26,8 @@ class _SignupState extends State<Signup> {
   final confirm_password_controller = TextEditingController();
   final email_controller = TextEditingController();
   final mobile_controller = TextEditingController();
+
+
 
   @override
   void dispose() {
@@ -374,30 +383,48 @@ class _SignupState extends State<Signup> {
     return InkWell(
       //TODO push to BottomBar
       onTap: (){
-        bool checkValidation = _checkControl();
+        var checkValidation = _checkControl();
 
-        if(checkValidation){
-          authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
-            if(status.isSuccess!){
-              debugPrint("Success");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
-            }else{
-              debugPrint("Failed");
-            }
-          });
-        }else{
-          Fluttertoast.showToast(
-              msg: "Password is not Matched",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0
-          );
+        switch(checkValidation){
+          case ValidationError.password:
+            Fluttertoast.showToast(
+                msg: "Password is not Matched",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+
+            break;
+          case ValidationError.empty:
+            Fluttertoast.showToast(
+                msg: "Enter the value in the field",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+
+            break;
+
+          case ValidationError.none:
+            authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
+              if(status.isSuccess!){
+                debugPrint("Success");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
+              }else{
+                debugPrint("Failed");
+              }
+            });
+            break;
+
+          default:
+            debugPrint("Validation check Failed");
         }
-
-
       },
 
       // onTap: () => Navigator.push(
@@ -419,14 +446,15 @@ class _SignupState extends State<Signup> {
     );
   }
 
-  bool _checkControl() {
+  Object _checkControl() {
   //  TODO need to check control of input fields
     if(password_controller.text != confirm_password_controller.text){
       debugPrint("***** false");
-      return false;
+      return ValidationError.password;
+    }else if(password_controller.text.isEmpty || confirm_password_controller.text.isEmpty || email_controller.text.isEmpty || username_controller.text.isEmpty || mobile_controller.text.isEmpty){
+      return ValidationError.empty;
     }else {
-      debugPrint("***** true");
-      return true;
+      return ValidationError.none;
     }
   }
 }
