@@ -60,6 +60,8 @@ class MyApp extends StatelessWidget with WidgetsBindingObserver{
       case AppLifecycleState.paused:
         // TODO: Handle this case.
         break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
     }
   }
 }

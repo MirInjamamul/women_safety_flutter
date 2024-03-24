@@ -4,12 +4,12 @@ import '../data/response/response_model.dart';
 import '../repositories/auth_repo.dart';
 
 
-class AuthController extends GetxController with BaseController implements GetxService{
+class AuthController extends GetxController implements GetxService{
   final AuthRepo authRepo;
   AuthController({required this.authRepo});
 
   Future<ResponseModel> signUp(String email, String pwd, String userName, String mobile) async{
-    showLoading();
+    BaseController().showLoading();
     update();
     Response response = await authRepo.signUp(email: email, password: pwd, username: userName, mobile: mobile);
     ResponseModel responseModel;
@@ -25,14 +25,14 @@ class AuthController extends GetxController with BaseController implements GetxS
     }else{
       responseModel = ResponseModel(false, 'Internal Server Error');
     }
-    hideLoading();
+    BaseController().hideLoading();
     update();
     return responseModel;
   }
 
 
   Future<ResponseModel> signIn(String email, String pwd) async{
-    showLoading();
+    BaseController().showLoading();
     update();
     Response response = await authRepo.signIn(email: email);
     ResponseModel responseModel;
@@ -55,7 +55,7 @@ class AuthController extends GetxController with BaseController implements GetxS
       responseModel = ResponseModel(false, 'Internal Server Error');
     }
 
-    hideLoading();
+    BaseController().hideLoading();
     update();
     return responseModel;
   }

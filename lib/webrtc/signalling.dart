@@ -517,7 +517,7 @@ class Signaling {
   }
 
   Future<void> _createDataChannel(Session session,
-      {label: 'fileTransfer'}) async {
+      {label = 'fileTransfer'}) async {
     RTCDataChannelInit dataChannelDict = RTCDataChannelInit()
       ..maxRetransmits = 30;
     RTCDataChannel channel =

@@ -16,11 +16,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   fluttertoast: ^8.0.8
   http: ^0.13.5
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.2.2
   settings_ui: ^2.0.2
   sqflite: ^2.0.3
   path_provider: ^2.0.11
-  flutter_webrtc: ^0.8.7
+  flutter_webrtc: ^0.9.48+hotfix.1
   get: ^4.6.5
   flutter_inset_box_shadow: ^1.0.8
   url_launcher: ^6.1.7
