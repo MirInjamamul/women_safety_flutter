@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "740880217006",
+    "project_id": "safetyaid-84bb3",
+    "storage_bucket": "safetyaid-84bb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740880217006:android:cee4e676f08ff846fd8e3f",
+        "android_client_info": {
+          "package_name": "com.example.women_safety_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740880217006-vkkhprc4rp96oa7c66sjk36q094iiq5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnj_4g_GFv2SwYFQE8ECo-QH_Woj1U-iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740880217006-vkkhprc4rp96oa7c66sjk36q094iiq5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

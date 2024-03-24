@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:women_safety_flutter/pages/screens.dart';
@@ -415,6 +416,14 @@ class _SignupState extends State<Signup> {
             authController.signUp(email_controller.text, password_controller.text, username_controller.text, mobile_controller.text).then((status) {
               if(status.isSuccess!){
                 debugPrint("Success");
+                CollectionReference collectionReference = FirebaseFirestore.instance.collection("users");
+                collectionReference.add({
+                  'email': email_controller.text,
+                  'fullName': username_controller.text,
+                  'mobileNumber': mobile_controller.text,
+                  'password': password_controller.text
+                });
+
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
               }else{
                 debugPrint("Failed");

@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:women_safety_flutter/controllers/base_controller.dart';
 import '../data/response/response_model.dart';
+import '../pages/screens.dart';
 import '../repositories/auth_repo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class AuthController extends GetxController implements GetxService{
@@ -11,29 +14,47 @@ class AuthController extends GetxController implements GetxService{
   Future<ResponseModel> signUp(String email, String pwd, String userName, String mobile) async{
     BaseController().showLoading();
     update();
-    Response response = await authRepo.signUp(email: email, password: pwd, username: userName, mobile: mobile);
     ResponseModel responseModel;
-    if(response.statusCode == 200){
-      Map map = response.body;
-      authRepo.saveEmail(email);
-      authRepo.setName(userName);
-      authRepo.saveUserToken(map["token"]);
-      authRepo.createChatUser(map);
-      responseModel = ResponseModel(true, 'Login Success');
-    }else if(response.statusCode == 422 || response.statusCode == 302){
-      responseModel = ResponseModel(false, 'The email has already been taken.');
-    }else{
-      responseModel = ResponseModel(false, 'Internal Server Error');
-    }
-    BaseController().hideLoading();
-    update();
-    return responseModel;
+    bool success = false;
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pwd).then((response){
+      debugPrint("::: Auth ::: New User Created");
+      BaseController().hideLoading();
+      update();
+
+      success = true;
+
+    }).onError((error, stackTrace){
+      BaseController().hideLoading();
+      update();
+
+      success = false;
+    });
+
+    // Response response = await authRepo.signUp(email: email, password: pwd, username: userName, mobile: mobile);
+    // ResponseModel responseModel;
+    // if(response.statusCode == 200){
+    //   Map map = response.body;
+    //   authRepo.saveEmail(email);
+    //   authRepo.setName(userName);
+    //   authRepo.saveUserToken(map["token"]);
+    //   authRepo.createChatUser(map);
+    //   responseModel = ResponseModel(true, 'Login Success');
+    // }else if(response.statusCode == 422 || response.statusCode == 302){
+    //   responseModel = ResponseModel(false, 'The email has already been taken.');
+    // }else{
+    //   responseModel = ResponseModel(false, 'Internal Server Error');
+    // }
+    // BaseController().hideLoading();
+    // update();
+    return ResponseModel(success, "Unknown Error");
   }
 
 
   Future<ResponseModel> signIn(String email, String pwd) async{
     BaseController().showLoading();
     update();
+
+
     Response response = await authRepo.signIn(email: email);
     ResponseModel responseModel;
     if(response.statusCode == 200){
