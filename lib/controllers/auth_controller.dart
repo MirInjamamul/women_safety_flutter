@@ -51,34 +51,46 @@ class AuthController extends GetxController implements GetxService{
 
 
   Future<ResponseModel> signIn(String email, String pwd) async{
+    bool success = false;
+    String message = "Unknown Error";
+
     BaseController().showLoading();
     update();
 
 
-    Response response = await authRepo.signIn(email: email);
-    ResponseModel responseModel;
-    if(response.statusCode == 200){
-      Map map = response.body;
-      if(map['password'] == pwd){
-        authRepo.saveEmail(email);
-        authRepo.saveUserToken(map["token"]);
-        setChatUserId(map['id'] + 1000);
-        authRepo.setName(map["name"]);
-        responseModel = ResponseModel(true, 'Login Success');
-      }else{
-        responseModel = ResponseModel(false, 'Wrong Password');
-      }
+    // Response response = await authRepo.signIn(email: email);
+    // ResponseModel responseModel;
 
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pwd).then((value){
+      success = true;
+      message = "Login Success";
+    }).onError((error, stackTrace){
+      success = false;
+      message = "Login Failed";
+    });
 
-    }else if(response.statusCode == 422 || response.statusCode == 302){
-      responseModel = ResponseModel(false, 'The email has already been taken.');
-    }else{
-      responseModel = ResponseModel(false, 'Internal Server Error');
-    }
+    // if(response.statusCode == 200){
+    //   Map map = response.body;
+    //   if(map['password'] == pwd){
+    //     authRepo.saveEmail(email);
+    //     authRepo.saveUserToken(map["token"]);
+    //     setChatUserId(map['id'] + 1000);
+    //     authRepo.setName(map["name"]);
+    //     responseModel = ResponseModel(true, 'Login Success');
+    //   }else{
+    //     responseModel = ResponseModel(false, 'Wrong Password');
+    //   }
+    //
+    //
+    // }else if(response.statusCode == 422 || response.statusCode == 302){
+    //   responseModel = ResponseModel(false, 'The email has already been taken.');
+    // }else{
+    //   responseModel = ResponseModel(false, 'Internal Server Error');
+    // }
 
     BaseController().hideLoading();
     update();
-    return responseModel;
+    return ResponseModel(success, message);
   }
 
   int getVerificationCode() {

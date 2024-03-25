@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:women_safety_flutter/constants/constants.dart';
 import 'package:women_safety_flutter/controllers/auth_controller.dart';
@@ -351,7 +352,8 @@ class Profile extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                            onTap: (){
-                             Get.find<AuthController>().clearSharedData().then((value) {
+                             Get.find<AuthController>().clearSharedData().then((value) async {
+                               await FirebaseAuth.instance.signOut();
                                Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (BuildContext context) => Signin()), (route) => false);
                              });
                              },
