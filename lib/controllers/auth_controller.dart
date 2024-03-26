@@ -16,6 +16,7 @@ class AuthController extends GetxController implements GetxService{
     update();
     ResponseModel responseModel;
     bool success = false;
+    String message = "Success";
     await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pwd).then((response){
       debugPrint("::: Auth ::: New User Created");
       BaseController().hideLoading();
@@ -28,6 +29,7 @@ class AuthController extends GetxController implements GetxService{
       update();
 
       success = false;
+      message = "${error.toString()}";
     });
 
     // Response response = await authRepo.signUp(email: email, password: pwd, username: userName, mobile: mobile);
@@ -46,7 +48,7 @@ class AuthController extends GetxController implements GetxService{
     // }
     // BaseController().hideLoading();
     // update();
-    return ResponseModel(success, "Unknown Error");
+    return ResponseModel(success, message);
   }
 
 
@@ -66,7 +68,7 @@ class AuthController extends GetxController implements GetxService{
       message = "Login Success";
     }).onError((error, stackTrace){
       success = false;
-      message = "Login Failed";
+      message = error.toString();
     });
 
     // if(response.statusCode == 200){

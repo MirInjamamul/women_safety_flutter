@@ -426,7 +426,15 @@ class _SignupState extends State<Signup> {
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBar()));
               }else{
-                debugPrint("Failed");
+                Fluttertoast.showToast(
+                    msg: status.message!,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
               }
             });
             break;
